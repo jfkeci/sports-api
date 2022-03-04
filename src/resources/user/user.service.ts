@@ -7,49 +7,79 @@ class UserService {
 
     /**
      * Register a new user
-     * 
      */
     public async register(
         name: string,
         email: string,
         password: string,
         role: string,
-    ): Promise<string | Error> {
-        try {
-            const user = await this.user.create({
-                name,
-                email,
-                password,
-                role
-            });
+    ): Promise<string | undefined> {
+        const user = await this.user.create({
+            name,
+            email,
+            password,
+            role
+        });
 
-            const accessToken = token.createToken(user);
+        const accessToken = token.createToken(user);
 
-            return accessToken;
-        } catch (error) {
-            throw new Error('Unable to create user');
-        }
+        return accessToken;
     }
 
     /**
-     * Attempt to login a user
-     * 
+     * Login user
      */
     public async login(
-        email: string,
-        password: string
-    ): Promise<string | Error> {
-        try {
-            const user = await this.user.findOne({ email });
-
-            if (!user) throw new Error('No user with this email');
-
-            if (await user.isValidPassword(password)) return token.createToken(user);
-
-            throw new Error('Can\'t login with these credentials');
-        } catch (error) {
-            throw new Error('Can\'t login with these credentials');
+        auth: {
+            email: string,
+            password: string
         }
+    ): Promise<string | undefined> {
+        const user = await this.user.findOne({ email: auth.email });
+
+        if (!user) return;
+
+        if (await user.isValidPassword(auth.password)) {
+            return token.createToken(user);
+        }
+
+        return;
+    }
+
+    /**
+     * Get single user by id
+     */
+    public async getUser(_id: string): Promise<User | null> {
+        const user = await this.user.findById(_id)
+
+        return user;
+    }
+
+    /**
+     * Get all users
+     */
+    public async getUsers(): Promise<Array<User> | null> {
+        const users = await this.user.find().select('-password').exec();
+
+        return users;
+    }
+
+    /**
+     * Delete single user by id
+     */
+    public async deleteUser(_id: string): Promise<User | null> {
+        let user = await this.user.findByIdAndRemove(_id);
+
+        return user;
+    }
+
+    /**
+     * Update single user by id
+     */
+    public async updateUser(id: string, user: User): Promise<User | null> {
+        let updatedUser = await this.user.findByIdAndUpdate(id, user);
+
+        return updatedUser;
     }
 }
 

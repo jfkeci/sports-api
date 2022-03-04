@@ -8,49 +8,44 @@ class SportService {
      * Create a new sport
      * 
      */
-    public async createSport(name: string): Promise<Sport | Error> {
-        try {
-            const sport = await this.sport.create({ name: name });
+    public async createSport(name: string): Promise<Sport | null> {
+        const sport = await this.sport.create({ name: name });
 
-            return sport;
-        } catch (error) {
-            throw new Error('Unable to create a new sport');
-        }
+        return sport;
     }
 
     /**
      * Get all sports
      * 
      */
-    public async getSports(): Promise<Array<Sport> | Error> {
-        try {
-            const sports = await this.sport.find({});
+    public async getSports(): Promise<Array<Sport>> {
+        const sports = await this.sport.find({});
 
-            if (!sports) throw new Error('No sport found');
-
-            return sports;
-        } catch (error) {
-            throw new Error('Something went wrong');
-        }
+        return sports;
     }
 
     /**
      * Get sport by id
      * 
      */
-    public async getSport(
-        id: string,
-    ): Promise<Sport | Error> {
-        try {
-            const sport = await this.sport.findOne({ _id: id });
+    public async getSport(_id: string): Promise<Sport | null> {
+        const sport = await this.sport.findOne({ _id });
 
-            if (!sport) throw new Error('No sport found');
-
-            return sport;
-        } catch (error) {
-            throw new Error('Something went wrong');
-        }
+        return sport;
     }
+
+    public async updateSport(_id: string, sport: object): Promise<Sport | null> {
+        let updatedSport = await this.sport.findByIdAndUpdate(_id, sport);
+
+        return updatedSport;
+    }
+
+    public async deleteSport(_id: string): Promise<Sport | null> {
+        const sport = await this.sport.remove({ _id });
+
+        return sport;
+    }
+
 }
 
 export default SportService;

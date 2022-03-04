@@ -4,6 +4,7 @@ import HttpException from '@/utils/exceptions/http.exception';
 import validationMiddleware from '@/middleware/validation.middleware';
 import validate from '@/resources/user/user.validation'
 import UserService from '@/resources/user/user.service';
+import { isValidId } from '@/utils/validateId';
 import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
 
 class UserController implements Controller {
@@ -35,10 +36,15 @@ class UserController implements Controller {
             this.login
         );
 
-        this.router.get(`${this.path}`, authUser, this.getUser);
-        this.router.get(`${this.path}/admin`, authAdmin, this.getUser);
+        this.router.get(`${this.path}/:id`, this.getUser);
+        this.router.put(`${this.path}/:id`, this.updateUser);
+        this.router.get(`${this.path}`, this.getUsers);
+        this.router.delete(`${this.path}/:id`, this.deleteUser);
     }
 
+    /**
+     * Register user with role: 'user'
+     */
     private registerUser = async (
         req: Request,
         res: Response,
@@ -54,12 +60,17 @@ class UserController implements Controller {
                 'user'
             );
 
+            if (!token) return next(new HttpException(400, 'Something went wrong'));
+
             return res.status(201).json({ token });
         } catch (error: any) {
             next(new HttpException(400, error.message));
         }
     };
 
+    /**
+     * Register user with role: 'admin'
+     */
     private registerAdmin = async (
         req: Request,
         res: Response,
@@ -75,36 +86,121 @@ class UserController implements Controller {
                 'admin'
             );
 
+            if (!token) next(new HttpException(400, 'Something went wrong'));
+
             return res.status(201).json({ token });
         } catch (error: any) {
             next(new HttpException(400, error.message));
         }
     };
 
+    /**
+     * Login user
+     */
     private login = async (
         req: Request,
         res: Response,
         next: NextFunction,
     ): Promise<Response | void> => {
         try {
-            const { email, password } = req.body;
+            const token = await this.UserService.login(req.body);
 
-            const token = await this.UserService.login(email, password);
+            if (!token) return next(new HttpException(404, 'Invalid credentials'));
 
             return res.status(200).json({ token });
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     };
 
-    private getUser = (
+    /**
+     * Get single user by id
+     */
+    private getUser = async (
         req: Request,
         res: Response,
         next: NextFunction
-    ): Response | void => {
-        if (!req.user) return next(new HttpException(404, 'No logged in user'));
+    ): Promise<Response | void> => {
+        try {
+            const id = req.params.id;
 
-        return res.status(200).json({ user: req.body });
+            if (!isValidId(id)) return next(new HttpException(404, 'Invalid id'));
+
+            const user = await this.UserService.getUser(id);
+            if (!user) return next(new HttpException(404, 'No user found'));
+
+            return res.status(200).json({ user });
+        } catch (error: any) {
+            next(new HttpException(500, error.message));
+        }
+    }
+
+    /**
+     * Get all users
+     */
+    private getUsers = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response | void> => {
+        try {
+            const users = await this.UserService.getUsers();
+
+            if (!users) return next(new HttpException(404, 'No users found'));
+
+            return res.status(200).json({ users });
+        } catch (error: any) {
+            next(new HttpException(500, error.message));
+        }
+    }
+
+    /**
+     * Delete single user by id
+     */
+    private deleteUser = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response | void> => {
+        try {
+            const id = req.params.id;
+
+            if (!isValidId(id)) return next(new HttpException(404, 'Invalid id'));
+
+            const user = await this.UserService.deleteUser(id);
+
+            if (!user) return next(new HttpException(404, 'No user found'));
+
+            return res.status(204).send();
+        } catch (error: any) {
+            next(new HttpException(500, error.message));
+        }
+    }
+
+    /**
+     * Update single user by id
+     */
+    private updateUser = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response | void> => {
+        try {
+            const id = req.params.id;
+            if (!isValidId(id)) return next(new HttpException(404, 'Invalid id'));
+
+            const user = await this.UserService.getUser(id);
+
+            if (!user) return next(new HttpException(404, 'No user found'));
+
+            const updatedUser = await this.UserService.updateUser(id, req.body)
+
+            if (!updatedUser) return next(new HttpException(400, 'Failed to update'));
+
+            return res.status(200).json({ user: updatedUser });
+        } catch (error: any) {
+            next(new HttpException(500, error.message));
+        }
     }
 }
 

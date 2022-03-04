@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
 
-export default interface User extends Document {
+export default interface Sport extends Document {
     name: string;
 }
