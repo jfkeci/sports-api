@@ -16,6 +16,57 @@ class EnrollmentService {
 
         return enrollment;
     }
+
+    public async getEnrollments(): Promise<Array<Enrollment> | null> {
+        const enrollments = await this.enrollment.find();
+
+        return enrollments;
+    }
+
+    public async getEnrollment(_id: string): Promise<Enrollment | null> {
+        const enrollment = await this.enrollment.findById({ _id })
+
+        return enrollment;
+    }
+
+    public async enrollmentsByUserId(userId: string): Promise<Array<Enrollment> | null> {
+        const enrollments = await this.enrollment.find({ userId: userId });
+
+        return enrollments;
+    }
+
+    public async enrollmentsByClassId(classId: string): Promise<Array<Enrollment> | null> {
+        const enrollments = await this.enrollment.find({ classId: classId });
+
+        return enrollments;
+    }
+
+    public async enrollmentByUserClassPair(
+        userId: string,
+        classId: string
+    ): Promise<Enrollment | null> {
+        const enrollment = await this.enrollment.find({
+            userId: userId,
+            classId: classId
+        });
+
+        return enrollment[0];
+    }
+
+    public async deleteEnrollment(_id: string): Promise<Enrollment | null> {
+        const enrollment = await this.enrollment.findByIdAndRemove(_id);
+
+        return enrollment;
+    }
+
+    public async updateEnrollment(
+        _id: string,
+        enrollment: object
+    ): Promise<Enrollment | null> {
+        const updatedEnrollment = await this.enrollment.findByIdAndUpdate(_id, enrollment);
+
+        return updatedEnrollment;
+    }
 }
 
 export default EnrollmentService;

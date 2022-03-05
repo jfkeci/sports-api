@@ -52,6 +52,10 @@ class App {
             console.log(`App listening on port ${this.port}`)
         })
     }
+
+    public getApp(): Application {
+        return this.express;
+    }
 }
 
 export default App;
