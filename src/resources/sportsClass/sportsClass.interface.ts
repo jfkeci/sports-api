@@ -5,7 +5,7 @@ export default interface SportsClass extends Document {
     description: string;
     sport: string;
     ageLevel: string;
-    weekSchedule: Array<object>;
+    weekSchedule: Array<Date>;
     classStart: Date;
     classDuration: number;
     createdBy: string;

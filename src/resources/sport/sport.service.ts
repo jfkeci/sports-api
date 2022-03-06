@@ -18,8 +18,12 @@ class SportService {
      * Get all sports
      * 
      */
-    public async getSports(): Promise<Array<Sport>> {
-        const sports = await this.sport.find({});
+    public async getSports(name?: string): Promise<Array<Sport>> {
+        let query = {};
+
+        if (name) query = { name: name };
+
+        const sports = await this.sport.find(query);
 
         return sports;
     }
@@ -45,7 +49,6 @@ class SportService {
 
         return sport;
     }
-
 }
 
 export default SportService;

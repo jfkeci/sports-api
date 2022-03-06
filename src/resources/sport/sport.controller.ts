@@ -5,7 +5,7 @@ import validationMiddleware from '@/middleware/validation.middleware';
 import { validate } from '@/resources/sport/sport.validation'
 import SportService from '@/resources/sport/sport.service';
 import { authAdmin } from '@/middleware/authenticated.middleware';
-import { isValidId } from '@/utils/validateId';
+import { isValidId } from '@/utils/validate.utils';
 
 class SportController implements Controller {
     public path = '/sports';
@@ -62,11 +62,13 @@ class SportController implements Controller {
         next: NextFunction
     ): Promise<Response | void> => {
         try {
-            const sports = await this.SportService.getSports();
+            const name = req.query.name;
+
+            const sports = await this.SportService.getSports(String(name));
 
             if (!sports) next(new HttpException(404, 'No sports found'))
 
-            return res.status(201).json(sports);
+            return res.status(200).json(sports);
         } catch (error: any) {
             return next(new HttpException(400, error.message));
         }
@@ -127,7 +129,7 @@ class SportController implements Controller {
 
             return res.status(204).send();
         } catch (error: any) {
-            return next(new HttpException(400, error.message))
+            return next(new HttpException(400, error.message));
         }
     }
 }

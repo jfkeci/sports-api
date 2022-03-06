@@ -5,7 +5,7 @@ import validationMiddleware from '@/middleware/validation.middleware';
 import { validate } from '@/resources/rating/rating.validation'
 import RatingService from '@/resources/rating/rating.service';
 import { authAdmin } from '@/middleware/authenticated.middleware';
-import { isValidId } from '@/utils/validateId';
+import { isValidId } from '@/utils/validate.utils';
 
 class RatingController implements Controller {
     public path = '/ratings';

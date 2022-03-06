@@ -4,7 +4,7 @@ import HttpException from '@/utils/exceptions/http.exception';
 import validationMiddleware from '@/middleware/validation.middleware';
 import validate from '@/resources/user/user.validation'
 import UserService from '@/resources/user/user.service';
-import { isValidId } from '@/utils/validateId';
+import { isValidId } from '@/utils/validate.utils';
 import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
 
 class UserController implements Controller {

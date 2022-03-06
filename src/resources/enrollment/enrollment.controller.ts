@@ -5,7 +5,7 @@ import validationMiddleware from '@/middleware/validation.middleware';
 import { validate } from '@/resources/enrollment/enrollment.validation'
 import EnrollmentService from '@/resources/enrollment/enrollment.service';
 import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
-import { isValidId } from '@/utils/validateId';
+import { isValidId } from '@/utils/validate.utils';
 import { ResolvedConfigFileName } from 'typescript';
 
 class EnrollmentController implements Controller {

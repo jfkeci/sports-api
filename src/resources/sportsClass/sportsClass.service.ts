@@ -36,10 +36,49 @@ class SportsClassService {
      * Get all sports classes
      * 
      */
-    public async getSportsClasses(): Promise<Array<SportsClass>> {
-        const sportsClasses = await this.sportsClass.find({});
+    public async getSportsClasses(
+        name?: string,
+        age?: string
+    ): Promise<Array<SportsClass>> {
+        let query = {};
+
+        if (name) query = { name: name };
+        if (age) query = { name: name };
+        if (age && name) query = {
+            name: name,
+            age: age
+        };
+
+        const sportsClasses = await this.sportsClass.find(query);
 
         return sportsClasses;
+    }
+
+    /**
+     * Get sports class by id
+     */
+    public async getSportsClass(_id: string): Promise<SportsClass | null> {
+        const sportsClass = await this.sportsClass.findOne({ _id });
+
+        return sportsClass;
+    }
+
+    public async deleteSportsClass(_id: string): Promise<SportsClass | null> {
+        const sportsClass = await this.sportsClass.findByIdAndRemove(_id);
+
+        return sportsClass;
+    }
+
+    public async updateSportsClass(
+        _id: string,
+        sportsClass: object
+    ): Promise<SportsClass | null> {
+        const updatedSportsClass = await this.sportsClass.findByIdAndUpdate(
+            _id,
+            sportsClass
+        );
+
+        return updatedSportsClass;
     }
 }
 
