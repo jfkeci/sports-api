@@ -86,8 +86,8 @@ class SportController implements Controller {
             if (!sport) next(new HttpException(404, 'No sport found'));
 
             return res.status(201).json(sport);
-        } catch (error) {
-            return next(new HttpException(400, 'Something went wrong'))
+        } catch (error: any) {
+            return next(new HttpException(400, error.message))
         }
     };
 
@@ -107,8 +107,8 @@ class SportController implements Controller {
 
             return res.status(200).json(updatedSport);
 
-        } catch (error) {
-            return next(new HttpException(400, 'Something went wrong'))
+        } catch (error: any) {
+            return next(new HttpException(400, error.message))
         }
     }
 

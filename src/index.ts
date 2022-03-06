@@ -6,6 +6,7 @@ import UserController from '@/resources/user/user.controller';
 import SportController from '@/resources/sport/sport.controller';
 import EnrollmentController from '@/resources/enrollment/enrollment.controller';
 import RatingController from '@/resources/rating/rating.controller';
+import SportsClassController from '@/resources/sportsClass/sportsClass.controller';
 
 validateEnv();
 
@@ -15,6 +16,7 @@ const app = new App(
         new SportController,
         new EnrollmentController,
         new RatingController,
+        new SportsClassController,
     ],
     Number(process.env.PORT)
 );
