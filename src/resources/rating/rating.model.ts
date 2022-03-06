@@ -1,8 +1,7 @@
 import { Schema, model } from 'mongoose';
-import Enrollment from '@/resources/enrollment/enrollment.interface'
-import { number } from 'joi';
+import Rating from '@/resources/rating/rating.interface'
 
-const EnrollmentSchema = new Schema(
+const RatingSchema = new Schema(
     {
         text: {
             type: String,
@@ -26,4 +25,4 @@ const EnrollmentSchema = new Schema(
     }, { timestamps: true }
 );
 
-export default model<Enrollment>('Enrollment', EnrollmentSchema);
+export default model<Rating>('Rating', RatingSchema);

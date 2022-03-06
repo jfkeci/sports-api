@@ -44,6 +44,9 @@ class EnrollmentController implements Controller {
         try {
             const { userId, classId } = req.body;
 
+            if (!isValidId(userId)) next(new HttpException(404, 'Invalid user id'));
+            if (!isValidId(classId)) next(new HttpException(404, 'Invalid class id'));
+
             const enrollment = await this.EnrollmentService.createEnrollment(userId, classId);
 
             return res.status(201).json(enrollment);
@@ -94,7 +97,7 @@ class EnrollmentController implements Controller {
     ): Promise<Response | void> => {
         try {
             const userId = req.params.userId;
-            console.log(userId)
+
             if (!isValidId(userId)) return next(new HttpException(404, 'Invalid id'));
 
             const enrollments = await this.EnrollmentService.enrollmentsByUserId(userId);

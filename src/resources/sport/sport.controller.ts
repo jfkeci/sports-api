@@ -52,7 +52,7 @@ class SportController implements Controller {
 
             return res.status(201).json(sport);
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            return next(new HttpException(400, error.message));
         }
     };
 
@@ -68,7 +68,7 @@ class SportController implements Controller {
 
             return res.status(201).json(sports);
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            return next(new HttpException(400, error.message));
         }
     };
 
@@ -87,7 +87,7 @@ class SportController implements Controller {
 
             return res.status(201).json(sport);
         } catch (error) {
-            next(new HttpException(400, 'Something went wrong'))
+            return next(new HttpException(400, 'Something went wrong'))
         }
     };
 
@@ -108,7 +108,7 @@ class SportController implements Controller {
             return res.status(200).json(updatedSport);
 
         } catch (error) {
-            next(new HttpException(400, 'Something went wrong'))
+            return next(new HttpException(400, 'Something went wrong'))
         }
     }
 
@@ -127,7 +127,7 @@ class SportController implements Controller {
 
             return res.status(204).send();
         } catch (error: any) {
-            next(new HttpException(400, error.message))
+            return next(new HttpException(400, error.message))
         }
     }
 }
