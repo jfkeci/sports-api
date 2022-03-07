@@ -41,7 +41,7 @@ class SportsClassController implements Controller {
             this.deleteSportsClass
         );
 
-        // [] Delete a sports class - admin auth
+        // [] Update a sports class - admin auth
         // this.router.put(
         //     `${this.path}/:id`,
         //     authAdmin,
