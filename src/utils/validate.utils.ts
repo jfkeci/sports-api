@@ -1,4 +1,7 @@
+import EnrollmentService from "@/resources/enrollment/enrollment.service";
 import mongoose from "mongoose";
+
+const enrollmentService = new EnrollmentService();
 
 export const isValidId = (id: string): boolean => {
     if (!id) return false;
@@ -29,4 +32,20 @@ export const validateStartDate = (
     const date2 = schedule[0].getTime();
 
     return date1 <= date2
+}
+
+export const hasMaxUsers = async (userId: string): Promise<boolean> => {
+    const enrollments = await enrollmentService.enrollmentsByUserId(userId);
+    if (enrollments != null) {
+        if (enrollments.length >= 2) return true;
+    }
+    return false;
+}
+
+export const hasMaxEnrollments = async (classId: string): Promise<boolean> => {
+    const enrollments = await enrollmentService.enrollmentsByClassId(classId);
+    if (enrollments != null) {
+        if (enrollments.length >= 10) return true;
+    }
+    return false;
 }

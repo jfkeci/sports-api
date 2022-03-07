@@ -5,7 +5,7 @@ import validationMiddleware from '@/middleware/validation.middleware';
 import { validate } from '@/resources/enrollment/enrollment.validation'
 import EnrollmentService from '@/resources/enrollment/enrollment.service';
 import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
-import { isValidId } from '@/utils/validate.utils';
+import { hasMaxEnrollments, hasMaxUsers, isValidId } from '@/utils/validate.utils';
 import { ResolvedConfigFileName } from 'typescript';
 
 class EnrollmentController implements Controller {
@@ -44,8 +44,18 @@ class EnrollmentController implements Controller {
         try {
             const { userId, classId } = req.body;
 
-            if (!isValidId(userId)) next(new HttpException(404, 'Invalid user id'));
-            if (!isValidId(classId)) next(new HttpException(404, 'Invalid class id'));
+            if (!isValidId(userId)) return next(new HttpException(404, 'Invalid user id'));
+            if (!isValidId(classId)) return next(new HttpException(404, 'Invalid class id'));
+
+            const userHasMaxEnrollments = await hasMaxUsers(userId);
+            const classHasMaxEnrollments = await hasMaxEnrollments(classId);
+
+            if (userHasMaxEnrollments) return next(
+                new HttpException(409, 'Max number of enrollments reached for user')
+            );
+            if (classHasMaxEnrollments) return next(
+                new HttpException(409, 'Max number of enrolled users reached for class')
+            );
 
             const enrollment = await this.EnrollmentService.createEnrollment(userId, classId);
 
