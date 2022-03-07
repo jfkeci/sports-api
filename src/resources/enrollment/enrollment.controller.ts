@@ -4,7 +4,7 @@ import HttpException from '@/utils/exceptions/http.exception';
 import validationMiddleware from '@/middleware/validation.middleware';
 import { validate } from '@/resources/enrollment/enrollment.validation'
 import EnrollmentService from '@/resources/enrollment/enrollment.service';
-import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
+import { authAdmin, authPublic, authUser } from '@/middleware/authenticated.middleware';
 import { hasMaxEnrollments, hasMaxUsers, isValidId } from '@/utils/validate.utils';
 import { ResolvedConfigFileName } from 'typescript';
 
@@ -19,52 +19,52 @@ class EnrollmentController implements Controller {
     }
 
     private initRoutes(): void {
-        // [] Create enrollment route - user auth
+        // [x] Create enrollment - user auth
         this.router.post(
             `${this.path}`,
             [validationMiddleware(validate), authUser],
             this.createEnrollment
         );
 
-        // [] Get all enrollments route - admin auth
+        // [x] Get all enrollments - admin auth
         this.router.get(
             `${this.path}`,
             authAdmin,
             this.getEnrollments
         );
 
-        // [] Get enrollment by id route - admin auth
+        // [x] Get enrollment by id - admin auth
         this.router.get(
             `${this.path}/:id`,
             authAdmin,
             this.getEnrollment
         );
 
-        // [] Get enrollment by user and class pair - admin auth
+        // [x] Get enrollment by user and class pair - admin auth
         this.router.get(
             `${this.path}/pair/:userId/:classId`,
             authAdmin,
             this.enrollmentByUserClassPair
         );
 
-        // [] Get enrollment by user - user auth
+        // [x] Get enrollment by user - user auth
         this.router.get(
             `${this.path}/user/:userId`,
             authUser,
             this.enrollmentsByUserId
         );
 
-        // [] Get enrollment by class - admin auth
+        // [x] Get enrollment by class - admin auth
         this.router.get(
             `${this.path}/class/:classId`,
             authAdmin,
             this.enrollmentsByClassId
         );
 
-        // [] Delete enrollment (unenroll) - user auth
+        // [x] Delete enrollment (unenroll) - admin and user
         this.router.delete(
             `${this.path}/:id`,
-            authUser,
+            authPublic,
             this.deleteEnrollment
         );
 
@@ -99,6 +99,8 @@ class EnrollmentController implements Controller {
 
             const enrollment = await this.EnrollmentService.createEnrollment(userId, classId);
 
+            if (!enrollment) return next(new HttpException(400, 'Something went wrong'));
+
             return res.status(201).json(enrollment);
         } catch (error: any) {
             return next(new HttpException(400, error.message));
@@ -115,7 +117,7 @@ class EnrollmentController implements Controller {
 
             if (!enrollments) return next(new HttpException(404, 'No enrollments found'));
 
-            return res.status(201).json({ enrollments });
+            return res.status(200).json({ enrollments });
         } catch (error: any) {
             return next(new HttpException(400, error.message));
         }
@@ -134,7 +136,7 @@ class EnrollmentController implements Controller {
 
             if (!enrollment) return next(new HttpException(404, 'No enrollment found'));
 
-            return res.status(201).json(enrollment);
+            return res.status(200).json(enrollment);
         } catch (error: any) {
             return next(new HttpException(400, error.message))
         }
@@ -154,7 +156,7 @@ class EnrollmentController implements Controller {
 
             if (!enrollments) return next(new HttpException(404, 'No enrollment found'));
 
-            return res.status(201).json(enrollments);
+            return res.status(200).json(enrollments);
         } catch (error: any) {
             return next(new HttpException(400, error.message))
         }
@@ -171,9 +173,9 @@ class EnrollmentController implements Controller {
 
             const enrollments = await this.EnrollmentService.enrollmentsByClassId(classId);
 
-            if (!enrollments) return next(new HttpException(404, 'No enrollment found'));
+            if (!enrollments) return next(new HttpException(404, 'No enrollments found'));
 
-            return res.status(201).json(enrollments);
+            return res.status(200).json(enrollments);
         } catch (error: any) {
             return next(new HttpException(400, error.message))
         }
@@ -195,7 +197,7 @@ class EnrollmentController implements Controller {
 
             if (!enrollment) return next(new HttpException(404, 'No enrollment found'));
 
-            return res.status(201).json(enrollment);
+            return res.status(200).json(enrollment);
         } catch (error: any) {
             return next(new HttpException(400, error.message))
         }
