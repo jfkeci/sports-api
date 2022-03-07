@@ -19,21 +19,61 @@ class EnrollmentController implements Controller {
     }
 
     private initRoutes(): void {
+        // [] Create enrollment route - user auth
         this.router.post(
             `${this.path}`,
-            [validationMiddleware(validate)],
+            [validationMiddleware(validate), authUser],
             this.createEnrollment
         );
 
-        this.router.get(`${this.path}`, this.getEnrollments)
-        this.router.get(`${this.path}/:id`, this.getEnrollment)
-        this.router.get(`${this.path}/pair/:userId/:classId`, this.enrollmentByUserClassPair)
-        this.router.get(`${this.path}/user/:userId`, this.enrollmentsByUserId)
-        this.router.get(`${this.path}/class/:classId`, this.enrollmentsByClassId)
+        // [] Get all enrollments route - admin auth
+        this.router.get(
+            `${this.path}`,
+            authAdmin,
+            this.getEnrollments
+        );
 
-        this.router.delete(`${this.path}/:id`, this.deleteEnrollment)
-        this.router.put(`${this.path}/:id`, this.updateEnrollment)
+        // [] Get enrollment by id route - admin auth
+        this.router.get(
+            `${this.path}/:id`,
+            authAdmin,
+            this.getEnrollment
+        );
 
+        // [] Get enrollment by user and class pair - admin auth
+        this.router.get(
+            `${this.path}/pair/:userId/:classId`,
+            authAdmin,
+            this.enrollmentByUserClassPair
+        );
+
+        // [] Get enrollment by user - user auth
+        this.router.get(
+            `${this.path}/user/:userId`,
+            authUser,
+            this.enrollmentsByUserId
+        );
+
+        // [] Get enrollment by class - admin auth
+        this.router.get(
+            `${this.path}/class/:classId`,
+            authAdmin,
+            this.enrollmentsByClassId
+        );
+
+        // [] Delete enrollment (unenroll) - user auth
+        this.router.delete(
+            `${this.path}/:id`,
+            authUser,
+            this.deleteEnrollment
+        );
+
+        // [] Update enrollment - user auth
+        this.router.put(
+            `${this.path}/:id`,
+            authUser,
+            this.updateEnrollment
+        );
     }
 
     private createEnrollment = async (

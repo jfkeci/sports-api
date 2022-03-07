@@ -4,7 +4,7 @@ import HttpException from '@/utils/exceptions/http.exception';
 import validationMiddleware from '@/middleware/validation.middleware';
 import { validate } from '@/resources/rating/rating.validation'
 import RatingService from '@/resources/rating/rating.service';
-import { authAdmin } from '@/middleware/authenticated.middleware';
+import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
 import { isValidId } from '@/utils/validate.utils';
 
 class RatingController implements Controller {
@@ -18,41 +18,53 @@ class RatingController implements Controller {
     }
 
     private initRoutes(): void {
+        // [] Create a new rating - user auth
         this.router.post(
             `${this.path}`,
-            validationMiddleware(validate),
+            [validationMiddleware(validate), authUser],
             this.createRating
         );
 
+        // [] Get all ratings, admin auth
         this.router.get(
             `${this.path}`,
+            authAdmin,
             this.getRatings
         );
 
+        // [] Get rating by id - admin auth
         this.router.get(
             `${this.path}/:id`,
+            authAdmin,
             this.getRating
         );
 
+        // [] Get ratings by class - admin auth
         this.router.get(
             `${this.path}/class/:classId`,
+            authAdmin,
             this.ratingsByClass
         );
 
+        // [] Get ratings by user - admin auth
         this.router.get(
             `${this.path}/user/:userId`,
+            authAdmin,
             this.ratingsByUser
         );
 
-        this.router.delete(
-            `${this.path}/:id`,
-            this.deleteRating
-        );
 
-        this.router.put(
-            `${this.path}/:id`,
-            this.updateRating
-        );
+        // [] Delete rating - only for development
+        // this.router.delete(
+        //     `${this.path}/:id`,
+        //     this.deleteRating
+        // );
+
+        // [] Update rating - only for development
+        // this.router.put(
+        //     `${this.path}/:id`,
+        //     this.updateRating
+        // );
     }
 
     private createRating = async (

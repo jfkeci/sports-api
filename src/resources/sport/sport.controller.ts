@@ -4,7 +4,7 @@ import HttpException from '@/utils/exceptions/http.exception';
 import validationMiddleware from '@/middleware/validation.middleware';
 import { validate } from '@/resources/sport/sport.validation'
 import SportService from '@/resources/sport/sport.service';
-import { authAdmin } from '@/middleware/authenticated.middleware';
+import { authAdmin, authPublic } from '@/middleware/authenticated.middleware';
 import { isValidId } from '@/utils/validate.utils';
 
 class SportController implements Controller {
@@ -18,26 +18,40 @@ class SportController implements Controller {
     }
 
     private initRoutes(): void {
+        // [] Create a new sport - admin auth
         this.router.post(
             `${this.path}`,
             [validationMiddleware(validate), authAdmin],
             this.createSport
         );
 
+        // [] Update sport - admin auth
         this.router.put(
             `${this.path}/:id`,
             [validationMiddleware(validate), authAdmin],
             this.updateSport
         )
 
+        // [] Delete sport - admin auth
         this.router.delete(
             `${this.path}/:id`,
             authAdmin,
             this.deleteSport
         )
 
-        this.router.get(`${this.path}`, this.getSports);
-        this.router.get(`${this.path}/:id`, this.getSport);
+        // [] Get all sports - user or admin
+        this.router.get(
+            `${this.path}`,
+            authPublic,
+            this.getSports
+        );
+
+        // [] Get sport by id - admin auth
+        this.router.get(
+            `${this.path}/:id`,
+            authAdmin,
+            this.getSport
+        );
     }
 
     private createSport = async (
