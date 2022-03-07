@@ -18,7 +18,7 @@ class RatingController implements Controller {
     }
 
     private initRoutes(): void {
-        // [] Create a new rating - user auth
+        // [x] Create a new rating - user auth
         this.router.post(
             `${this.path}`,
             [validationMiddleware(validate), authUser],
@@ -54,16 +54,10 @@ class RatingController implements Controller {
         );
 
 
-        // [] Delete rating - only for development
+        // [x] Delete rating - only for development
         // this.router.delete(
         //     `${this.path}/:id`,
         //     this.deleteRating
-        // );
-
-        // [] Update rating - only for development
-        // this.router.put(
-        //     `${this.path}/:id`,
-        //     this.updateRating
         // );
     }
 
