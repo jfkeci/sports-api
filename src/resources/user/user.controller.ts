@@ -109,7 +109,7 @@ class UserController implements Controller {
 
             return res.status(200).json({ token });
         } catch (error: any) {
-            next(new HttpException(500, error.message));
+            next(new HttpException(400, error.message));
         }
     };
 
@@ -131,7 +131,7 @@ class UserController implements Controller {
 
             return res.status(200).json({ user });
         } catch (error: any) {
-            next(new HttpException(500, error.message));
+            next(new HttpException(400, error.message));
         }
     }
 
@@ -150,7 +150,7 @@ class UserController implements Controller {
 
             return res.status(200).json({ users });
         } catch (error: any) {
-            next(new HttpException(500, error.message));
+            next(new HttpException(400, error.message));
         }
     }
 
@@ -173,7 +173,7 @@ class UserController implements Controller {
 
             return res.status(204).send();
         } catch (error: any) {
-            next(new HttpException(500, error.message));
+            next(new HttpException(400, error.message));
         }
     }
 
@@ -199,7 +199,7 @@ class UserController implements Controller {
 
             return res.status(200).json({ user: updatedUser });
         } catch (error: any) {
-            next(new HttpException(500, error.message));
+            next(new HttpException(400, error.message));
         }
     }
 }

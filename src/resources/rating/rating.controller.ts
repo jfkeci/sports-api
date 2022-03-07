@@ -75,7 +75,7 @@ class RatingController implements Controller {
 
             return res.status(201).json(newRating);
         } catch (error: any) {
-            return next(new HttpException(500, error.message));
+            return next(new HttpException(400, error.message));
         }
     };
 
@@ -91,7 +91,7 @@ class RatingController implements Controller {
 
             return res.status(200).json(ratings)
         } catch (error: any) {
-            return next(new HttpException(500, error.message));
+            return next(new HttpException(400, error.message));
         }
     };
 
@@ -111,7 +111,7 @@ class RatingController implements Controller {
 
             return res.status(200).json(rating)
         } catch (error: any) {
-            return next(new HttpException(500, error.message));
+            return next(new HttpException(400, error.message));
         }
     };
 
@@ -131,7 +131,7 @@ class RatingController implements Controller {
 
             return res.status(200).json(ratings)
         } catch (error: any) {
-            return next(new HttpException(500, error.message));
+            return next(new HttpException(400, error.message));
         }
     };
 
@@ -151,7 +151,7 @@ class RatingController implements Controller {
 
             return res.status(200).json(ratings)
         } catch (error: any) {
-            return next(new HttpException(500, error.message));
+            return next(new HttpException(400, error.message));
         }
     };
 
@@ -172,7 +172,7 @@ class RatingController implements Controller {
 
             return res.status(200).json(updatedRating)
         } catch (error: any) {
-            return next(new HttpException(500, error.message));
+            return next(new HttpException(400, error.message));
         }
     }
 
@@ -191,7 +191,7 @@ class RatingController implements Controller {
 
             return res.status(204).send();
         } catch (error: any) {
-            return next(new HttpException(500, error.message));
+            return next(new HttpException(400, error.message));
         }
     }
 }
