@@ -205,3 +205,47 @@ class UserController implements Controller {
 }
 
 export default UserController;
+
+/**
+ * @swagger
+ * /users/user/register:
+ *   get:
+ *     summary: Register a new user
+ *     description: Add a new user with 'user' role to the database
+ *     tags:
+ *       - user
+ *     requestBody:
+ *       description: Register user data
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       201:
+ *         description: A successfull operation.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+     
+ */
+
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     summary: Retrieve a list of Picture Gallery users.
+ *     description: Retrieve a list of Sports compley users with user role
+ *     tags:
+ *       - user
+ *     responses:
+ *       200:
+ *         description: A list of users.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User'
+ */

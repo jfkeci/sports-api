@@ -1,0 +1,152 @@
+{
+    "swaggerDefinition": {
+        "info": {
+            "title": "Sports API",
+            "description": "Sports API",
+            "version": "1.0.0",
+            "contact": {
+                "name": "Jakov Filip Sabolicek",
+                "url": "https://github.com/jfkeci",
+                "email": "ja.lip132@gmail.com"
+            }
+        },
+        "host": "http://localhost:13374",
+        "basePath": "/api",
+        "paths": {
+            "/users/user/register": {
+                "get": {
+                    "summary": "Create a new user",
+                    "description": "Attempt to register a new user with role 'user'",
+                    "tags": [
+                        "users"
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [],
+                    "responses": {
+                        "201": {
+                            "description": "successful operation",
+                            "schema": {
+                                "schema": {
+                                    "$ref": "#/definitions/Token"
+                                }
+                            }
+                        },
+                        "500": {
+                            "description": "Server error",
+                            "schema": {
+                                "$ref": "#/definitions/InvalidResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "/users": {
+                "get": {
+                    "summary": "Get all users",
+                    "description": "A list of users",
+                    "tags": [
+                        "users"
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [],
+                    "responses": {
+                        "200": {
+                            "description": "successful operation",
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/User"
+                                }
+                            }
+                        },
+                        "500": {
+                            "description": "Server error",
+                            "schema": {
+                                "$ref": "#/definitions/InvalidResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "definitions": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "6220eb175e1f53918c6fcd53"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "jdoe@mail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "password"
+                    },
+                    "createdAt": {
+                        "type": "date",
+                        "example": "2022-03-03T16:21:43.133+00:00"
+                    },
+                    "updatedAt": {
+                        "type": "date",
+                        "example": "2022-03-03T16:21:43.133+00:00"
+                    }
+                }
+            },
+            "Sport": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "6220eb175e1f53918c6fcd53"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Football"
+                    },
+                    "createdAt": {
+                        "type": "date",
+                        "example": "2022-03-03T16:21:43.133+00:00"
+                    },
+                    "updatedAt": {
+                        "type": "date",
+                        "example": "2022-03-03T16:21:43.133+00:00"
+                    }
+                }
+            },
+            "Token": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "example": "6220eb175e1f53918c6fcd53"
+                    }
+                }
+            },
+            "InvalidResponse": {
+                "type": "object",
+                "properties": {
+                    "statusCode": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "apis": [
+        "@/resources/user/user.model.ts"
+    ]
+}

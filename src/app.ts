@@ -6,6 +6,9 @@ import morgan from 'morgan';
 import Controller from '@/utils/interfaces/controller.interface';
 import ErrorMiddleware from '@/middleware/error.middleware';
 import helmet from 'helmet';
+import swaggerUi from 'swagger-ui-express'
+import { swaggerDocs } from '@/utils/swagger/swagger';
+
 
 class App {
     public express: Application;
@@ -19,6 +22,9 @@ class App {
         this.initMiddleware();
         this.initControllers(controllers);
         this.initErrorHandling();
+        this.initSwagger();
+
+        this.express.use('/api', (req, res) => { res.send('Welcome to Sports API') })
     }
 
     private initMiddleware(): void {
@@ -34,6 +40,14 @@ class App {
         controllers.forEach((controller: Controller) => {
             this.express.use('/api/', controller.router);
         })
+    }
+
+    private initSwagger() {
+        this.express.use(
+            '/api-docs',
+            swaggerUi.serve,
+            swaggerUi.setup(swaggerDocs)
+        );
     }
 
     private initErrorHandling(): void {
@@ -53,9 +67,9 @@ class App {
         })
     }
 
-    public getApp(): Application {
+    /* public getApp(): Application { // For testing
         return this.express;
-    }
+    } */
 }
 
 export default App;
