@@ -18,39 +18,32 @@ class SportController implements Controller {
     }
 
     private initRoutes(): void {
-        // [] Create a new sport - admin auth
+        // [x] Create a new sport - admin auth
         this.router.post(
             `${this.path}`,
             [validationMiddleware(validate), authAdmin],
             this.createSport
         );
 
-        // [] Update sport - admin auth
-        this.router.put(
-            `${this.path}/:id`,
-            [validationMiddleware(validate), authAdmin],
-            this.updateSport
-        )
-
-        // [] Delete sport - admin auth
-        this.router.delete(
-            `${this.path}/:id`,
-            authAdmin,
-            this.deleteSport
-        )
-
-        // [] Get all sports - user or admin
+        // [x] Get all sports - user or admin
         this.router.get(
             `${this.path}`,
             authPublic,
             this.getSports
         );
 
-        // [] Get sport by id - admin auth
+        // [x] Get sport by id - admin auth
         this.router.get(
             `${this.path}/:id`,
             authAdmin,
             this.getSport
+        );
+
+        // [x] Delete sport - admin auth
+        this.router.delete(
+            `${this.path}/:id`,
+            authAdmin,
+            this.deleteSport
         );
     }
 
@@ -76,7 +69,7 @@ class SportController implements Controller {
         next: NextFunction
     ): Promise<Response | void> => {
         try {
-            const name = req.query.name;
+            const name = req.query.name || '';
 
             const sports = await this.SportService.getSports(String(name));
 
@@ -106,27 +99,6 @@ class SportController implements Controller {
             return next(new HttpException(400, error.message))
         }
     };
-
-    private updateSport = async (
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ): Promise<Response | void> => {
-        try {
-            const id = req.params.id;
-            if (!isValidId) next(new HttpException(404, 'Invalid id'));
-            const sport = req.body;
-
-            const updatedSport = await this.SportService.updateSport(id, sport);
-
-            if (!updatedSport) next(new HttpException(404, 'No sport found'));
-
-            return res.status(200).json(updatedSport);
-
-        } catch (error: any) {
-            return next(new HttpException(400, error.message))
-        }
-    }
 
     private deleteSport = async (
         req: Request,

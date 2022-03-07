@@ -21,7 +21,7 @@ class SportService {
     public async getSports(name?: string): Promise<Array<Sport>> {
         let query = {};
 
-        if (name) query = { name: name };
+        if (name != '') query = { name: name };
 
         const sports = await this.sport.find(query);
 
@@ -38,14 +38,8 @@ class SportService {
         return sport;
     }
 
-    public async updateSport(_id: string, sport: object): Promise<Sport | null> {
-        let updatedSport = await this.sport.findByIdAndUpdate(_id, sport);
-
-        return updatedSport;
-    }
-
     public async deleteSport(_id: string): Promise<Sport | null> {
-        const sport = await this.sport.remove({ _id });
+        const sport = await this.sport.findByIdAndRemove({ _id });
 
         return sport;
     }
