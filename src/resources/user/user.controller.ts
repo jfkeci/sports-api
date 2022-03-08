@@ -63,7 +63,7 @@ class UserController implements Controller {
 
             return res.status(201).json({ accessToken });
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     };
 
@@ -109,7 +109,7 @@ class UserController implements Controller {
 
             return res.status(201).json({ accessToken });
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     };
 
@@ -139,7 +139,7 @@ class UserController implements Controller {
 
             return res.status(200).json({ authToken });
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     };
 
@@ -173,7 +173,7 @@ class UserController implements Controller {
 
             return res.status(200).send("Successfully updated password");
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     }
 
@@ -211,7 +211,7 @@ class UserController implements Controller {
 
             return res.status(200).send('If user with this email is registered, you will recieve a password reset email');
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     }
 
@@ -267,7 +267,7 @@ class UserController implements Controller {
 
             return res.status(200).json({ user });
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     }
 
@@ -286,7 +286,7 @@ class UserController implements Controller {
 
             return res.status(200).json({ users });
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     }
 
@@ -309,7 +309,7 @@ class UserController implements Controller {
 
             return res.status(204).send();
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     }
 
@@ -335,7 +335,7 @@ class UserController implements Controller {
 
             return res.status(200).json({ user: updatedUser });
         } catch (error: any) {
-            next(new HttpException(400, error.message));
+            next(new HttpException(500, error.message));
         }
     }
 }

@@ -72,7 +72,7 @@ class SportsClassController implements Controller {
 
             return res.status(201).json(sportsClass);
         } catch (error: any) {
-            return next(new HttpException(400, error.message));
+            return next(new HttpException(500, error.message));
         }
     };
 
@@ -93,7 +93,7 @@ class SportsClassController implements Controller {
 
             return res.status(201).json(sportsClasses);
         } catch (error: any) {
-            return next(new HttpException(400, error.message));
+            return next(new HttpException(500, error.message));
         }
     };
 
@@ -112,7 +112,7 @@ class SportsClassController implements Controller {
 
             return res.status(200).json(sportsClass);
         } catch (error: any) {
-            return next(new HttpException(400, error.message));
+            return next(new HttpException(500, error.message));
         }
     }
 
@@ -131,7 +131,7 @@ class SportsClassController implements Controller {
 
             return res.status(204).send();
         } catch (error: any) {
-            return next(new HttpException(400, error.message));
+            return next(new HttpException(500, error.message));
         }
     }
 }
