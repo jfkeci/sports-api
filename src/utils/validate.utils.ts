@@ -33,19 +33,3 @@ export const validateStartDate = (
 
     return date1 <= date2
 }
-
-export const hasMaxUsers = async (userId: string): Promise<boolean> => {
-    const enrollments = await enrollmentService.enrollmentsByUserId(userId);
-    if (enrollments != null) {
-        if (enrollments.length >= 2) return true;
-    }
-    return false;
-}
-
-export const hasMaxEnrollments = async (classId: string): Promise<boolean> => {
-    const enrollments = await enrollmentService.enrollmentsByClassId(classId);
-    if (enrollments != null) {
-        if (enrollments.length >= 10) return true;
-    }
-    return false;
-}

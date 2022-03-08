@@ -67,6 +67,28 @@ class EnrollmentService {
 
         return updatedEnrollment;
     }
+
+    public async hasMaxUsers(
+        userId: string
+    ): Promise<boolean> {
+        const enrollments = await this.enrollment.find({ userId: userId });
+
+        if (enrollments) {
+            if (enrollments.length >= 2) return true;
+        }
+
+        return false;
+    }
+
+    public async hasMaxEnrollments(
+        classId: string
+    ): Promise<boolean> {
+        const enrollments = await this.enrollment.find({ classId: classId });
+        if (enrollments) {
+            if (enrollments.length >= 10) return true;
+        }
+        return false;
+    }
 }
 
 export default EnrollmentService;

@@ -6,7 +6,8 @@ import { isValidId } from '@/utils/validate.utils';
 import { sendEmail } from '@/utils/mailer/mailer'
 import UserRoutes from './user.routes';
 import { nanoid } from 'nanoid';
-import token from '@/utils/token'
+import token from '@/utils/token';
+import bcrypt from 'bcrypt';
 
 class UserController implements Controller {
     public router = Router();
@@ -165,7 +166,9 @@ class UserController implements Controller {
 
             user.passwordResetCode = '';
 
-            user.password = password;
+            const hash = await bcrypt.hash(password, Number(process.env.SALT));
+
+            user.password = hash;
 
             const updatedUser = this.UserService.updateUser(id, user);
 

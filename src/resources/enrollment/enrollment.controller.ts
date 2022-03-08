@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction, response } from 'express';
 import Controller from '@/utils/interfaces/controller.interface';
 import HttpException from '@/utils/exceptions/http.exception';
 import EnrollmentService from '@/resources/enrollment/enrollment.service';
-import { hasMaxEnrollments, hasMaxUsers, isValidId } from '@/utils/validate.utils';
+import { isValidId } from '@/utils/validate.utils';
 import EnrollmentRoutes from './enrollment.routes';
 
 class EnrollmentController implements Controller {
@@ -29,13 +29,10 @@ class EnrollmentController implements Controller {
             if (!isValidId(userId)) return next(new HttpException(404, 'Invalid user id'));
             if (!isValidId(classId)) return next(new HttpException(404, 'Invalid class id'));
 
-            const userHasMaxEnrollments = await hasMaxUsers(userId);
-            const classHasMaxEnrollments = await hasMaxEnrollments(classId);
-
-            if (userHasMaxEnrollments) return next(
+            if (await this.EnrollmentService.hasMaxUsers(userId)) return next(
                 new HttpException(409, 'Max number of enrollments reached for user')
             );
-            if (classHasMaxEnrollments) return next(
+            if (await this.EnrollmentService.hasMaxEnrollments(classId)) return next(
                 new HttpException(409, 'Max number of enrolled users reached for class')
             );
 
