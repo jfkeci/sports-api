@@ -43,7 +43,7 @@ class RatingController implements Controller {
     };
 
     public getRatings = async (
-        req: Request,
+        _: Request,
         res: Response,
         next: NextFunction
     ): Promise<Response | void> => {

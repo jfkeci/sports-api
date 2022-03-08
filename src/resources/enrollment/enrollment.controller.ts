@@ -50,7 +50,7 @@ class EnrollmentController implements Controller {
     };
 
     public getEnrollments = async (
-        req: Request,
+        _: Request,
         res: Response,
         next: NextFunction
     ): Promise<Response | void> => {

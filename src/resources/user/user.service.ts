@@ -8,12 +8,12 @@ class UserService {
     /**
      * Register a new user
      */
-    public async register(
+    public async createUser(
         name: string,
         email: string,
         password: string,
         role: string,
-    ): Promise<string | undefined> {
+    ): Promise<User | undefined> {
         const user = await this.user.create({
             name,
             email,
@@ -21,9 +21,7 @@ class UserService {
             role
         });
 
-        const accessToken = token.createToken(user);
-
-        return accessToken;
+        return user;
     }
 
     /**
@@ -34,16 +32,16 @@ class UserService {
             email: string,
             password: string
         }
-    ): Promise<string | undefined> {
+    ): Promise<string | boolean> {
         const user = await this.user.findOne({ email: auth.email });
 
-        if (!user) return;
+        if (!user) return false;
 
         if (await user.isValidPassword(auth.password)) {
             return token.createToken(user);
         }
 
-        return;
+        return false;
     }
 
     /**
@@ -82,8 +80,8 @@ class UserService {
     /**
      * Update single user by id
      */
-    public async updateUser(id: string, user: User): Promise<User | null> {
-        let updatedUser = await this.user.findByIdAndUpdate(id, user);
+    public async updateUser(_id: string, user: User): Promise<User | null> {
+        let updatedUser = await this.user.findByIdAndUpdate(_id, user);
 
         return updatedUser;
     }

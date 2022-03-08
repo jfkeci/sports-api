@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 
 export const authUser = async (
     req: Request,
-    res: Response,
+    _: Response,
     next: NextFunction
 ): Promise<Response | void> => {
     const bearer = req.headers.authorization;

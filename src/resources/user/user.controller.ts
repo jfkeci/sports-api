@@ -5,6 +5,8 @@ import UserService from '@/resources/user/user.service';
 import { isValidId } from '@/utils/validate.utils';
 import { sendEmail } from '@/utils/mailer/mailer'
 import UserRoutes from './user.routes';
+import { nanoid } from 'nanoid';
+import token from '@/utils/token'
 
 class UserController implements Controller {
     public router = Router();
@@ -31,27 +33,35 @@ class UserController implements Controller {
             const { name, email, password } = req.body;
 
             const user = await this.UserService.getUserByEmail(email);
+
             if (user) return next(new HttpException(409, 'Account already exists'));
 
-            await sendEmail({
-                from: 'sportscomplex@info.com',
-                to: 'ja.lip132@gmail.com',
-                subject: 'SportsComplex account verification',
-                text: `Verification code: ${email}`
-            });
-
-            return res.send('')
-
-            const token = await this.UserService.register(
+            const newUser = await this.UserService.createUser(
                 name,
                 email,
                 password,
                 'user'
             );
 
-            if (!token) return next(new HttpException(400, 'Something went wrong'));
+            if (!newUser) return next(new HttpException(400, 'Something went wrong'));
 
-            return res.status(201).json({ token });
+            const accessToken = await token.createToken(newUser);
+
+            if (!accessToken) return next(new HttpException(400, 'Something went wrong'));
+
+            await sendEmail({
+                from: 'sportscomplex@info.com',
+                to: email,
+                subject: 'SportsComplex account verification',
+                text: `Confirm account, 
+                Verification code: ${newUser.verificationCode}
+                <a href="http://localhost:13374/api/users/verify/${newUser._id}/${newUser.verificationCode}">
+                Confirm
+                </a>
+                `
+            });
+
+            return res.status(201).json({ accessToken });
         } catch (error: any) {
             next(new HttpException(400, error.message));
         }
@@ -69,18 +79,35 @@ class UserController implements Controller {
             const { name, email, password } = req.body;
 
             const user = await this.UserService.getUserByEmail(email);
-            if (user) return next(new HttpException(409, 'Account already exists'))
 
-            const token = await this.UserService.register(
+            if (user) return next(new HttpException(409, 'Account already exists'));
+
+            const newUser = await this.UserService.createUser(
                 name,
                 email,
                 password,
                 'admin'
             );
 
-            if (!token) next(new HttpException(400, 'Something went wrong'));
+            if (!newUser) return next(new HttpException(400, 'Something went wrong'));
 
-            return res.status(201).json({ token });
+            const accessToken = await token.createToken(newUser);
+
+            if (!accessToken) return next(new HttpException(400, 'Something went wrong'));
+
+            await sendEmail({
+                from: 'sportscomplex@info.com',
+                to: email,
+                subject: 'SportsComplex account verification',
+                text: `Confirm account, 
+                Verification code: ${newUser.verificationCode}
+                <a href="http://localhost:13374/api/users/verify/${newUser._id}/${newUser.verificationCode}">
+                Confirm
+                </a>
+                `
+            });
+
+            return res.status(201).json({ accessToken });
         } catch (error: any) {
             next(new HttpException(400, error.message));
         }
@@ -95,15 +122,132 @@ class UserController implements Controller {
         next: NextFunction,
     ): Promise<Response | void> => {
         try {
-            const token = await this.UserService.login(req.body);
+            const { email, password } = req.body
+            const user = await this.UserService.getUserByEmail(email);
 
-            if (!token) return next(new HttpException(404, 'Invalid credentials'));
+            if (!user) return next(new HttpException(404, 'Invalid credentials'));
 
-            return res.status(200).json({ token });
+            if (!user.verified) return next(new HttpException(400, 'User not verified'));
+
+            if (!await user.isValidPassword(password)) {
+                return next(new HttpException(404, 'Invalid credentials'));
+            }
+
+            const authToken = await token.createToken(user);
+
+            if (!authToken) return next(new HttpException(404, 'Invalid credentials'));
+
+            return res.status(200).json({ authToken });
         } catch (error: any) {
             next(new HttpException(400, error.message));
         }
     };
+
+    public resetPassword = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response | void> => {
+        try {
+            const { id, passwordResetCode } = req.params;
+
+            const { password } = req.body;
+
+            if (!isValidId(id)) return next(new HttpException(404, 'Invalid id'));
+
+            const user = await this.UserService.getUser(id);
+
+            if (!user) return next(new HttpException(404, 'No user found'));
+
+            if (!user.passwordResetCode || user.passwordResetCode != passwordResetCode) {
+                return next(new HttpException(400, 'Couldn\'t verify user'));
+            }
+
+            user.passwordResetCode = '';
+
+            user.password = password;
+
+            const updatedUser = this.UserService.updateUser(id, user);
+
+            if (!updatedUser) return next(new HttpException(400, 'Something went wrong'));
+
+            return res.status(200).send("Successfully updated password");
+        } catch (error: any) {
+            next(new HttpException(400, error.message));
+        }
+    }
+
+    /**
+     * Reset user password
+     */
+    public forgotPasswordHandler = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response | void> => {
+        try {
+            const { email } = req.body;
+
+            const user = await this.UserService.getUserByEmail(email);
+
+            if (!user) return next(new HttpException(404, 'No user with this email'));
+
+            if (!user.verified) return next(new HttpException(400, 'User not verified'));
+
+            const resetCode = nanoid();
+
+            user.passwordResetCode = resetCode;
+
+            const updatedUser = await this.UserService.updateUser(user._id, user);
+
+            if (!updatedUser) return next(new HttpException(400, 'Something went wrong'))
+
+            await sendEmail({
+                from: 'sportscomplex@info.com',
+                to: user.email,
+                subject: "Reset your password",
+                text: `Password reset code: ${resetCode}. Id ${user._id}`,
+            });
+
+            return res.status(200).send('If user with this email is registered, you will recieve a password reset email');
+        } catch (error: any) {
+            next(new HttpException(400, error.message));
+        }
+    }
+
+    public verifyUser = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response | void> => {
+        try {
+            const { id, verificationCode } = req.params;
+
+            if (!isValidId) return next(new HttpException(404, 'Invalid id'));
+
+            const user = await this.UserService.getUser(id);
+
+            if (!user) return next(new HttpException(404, 'No user found'));
+
+            if (user.verified) return res.status(200).send('User already verified');
+
+            if (user.verificationCode == verificationCode) {
+                user.verified = true;
+
+                const updatedUser = await this.UserService.updateUser(id, user);
+
+                if (!updatedUser) {
+                    return next(new HttpException(500, 'Something went wrong'))
+                }
+
+                return res.status(200).send('User successfully verified')
+            }
+
+            return next(new HttpException(400, 'Couldn\'t verify user'))
+        } catch (error: any) {
+            next(new HttpException(500, error.message));
+        }
+    }
 
     /**
      * Get single user by id
@@ -131,7 +275,7 @@ class UserController implements Controller {
      * Get all users
      */
     public getUsers = async (
-        req: Request,
+        _: Request,
         res: Response,
         next: NextFunction
     ): Promise<Response | void> => {

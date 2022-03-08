@@ -28,6 +28,28 @@ class UserRoutes {
             controller.login
         );
 
+        this.router.post(
+            `${this.path}/password/reset`,
+            validationMiddleware(validate.passwordReset),
+            controller.resetPassword
+        );
+
+        this.router.get(
+            `${this.path}/verify/:id/:verificationCode`,
+            controller.verifyUser
+        );
+
+        this.router.get(
+            `${this.path}/password/reset/:id/:passwordResetCode`,
+            validationMiddleware(validate.passwordReset),
+            controller.resetPassword
+        );
+
+        this.router.post(
+            `${this.path}/password/forgot`,
+            controller.forgotPasswordHandler
+        );
+
         this.router.get(`${this.path}/:id`, authAdmin, controller.getUser);
         this.router.put(`${this.path}/:id`, authAdmin, controller.updateUser);
         this.router.get(`${this.path}`, authAdmin, controller.getUsers);
