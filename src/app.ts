@@ -8,6 +8,7 @@ import ErrorMiddleware from '@/middleware/error.middleware';
 import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express'
 import { swaggerDocs } from '@/utils/swagger/swagger';
+import log from '@/utils/logger/logger';
 
 
 class App {
@@ -58,12 +59,12 @@ class App {
         const { DB_USER, DB_PASSWORD, DB_DATABASE } = process.env
 
         mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.gg0cz.mongodb.net/${DB_DATABASE}?retryWrites=true&w=majority`)
-            .then(() => console.log('Connected to database'))
+            .then(() => log.info('Connected to database'))
     }
 
     public listen(): void {
         this.express.listen(this.port, () => {
-            console.log(`App listening on port ${this.port}`)
+            log.info(`App listening on port ${this.port}`)
         })
     }
 

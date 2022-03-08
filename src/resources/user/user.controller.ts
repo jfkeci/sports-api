@@ -1,12 +1,9 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import Controller from '@/utils/interfaces/controller.interface';
 import HttpException from '@/utils/exceptions/http.exception';
-import validationMiddleware from '@/middleware/validation.middleware';
-import validate from '@/resources/user/user.validation'
 import UserService from '@/resources/user/user.service';
 import { isValidId } from '@/utils/validate.utils';
-import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
-import { sendEmail } from '@/utils/mailer'
+import { sendEmail } from '@/utils/mailer/mailer'
 import UserRoutes from './user.routes';
 
 class UserController implements Controller {
@@ -38,7 +35,7 @@ class UserController implements Controller {
 
             await sendEmail({
                 from: 'sportscomplex@info.com',
-                to: email,
+                to: 'ja.lip132@gmail.com',
                 subject: 'SportsComplex account verification',
                 text: `Verification code: ${email}`
             });
