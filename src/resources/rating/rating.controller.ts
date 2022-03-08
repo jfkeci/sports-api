@@ -133,7 +133,7 @@ class RatingController implements Controller {
 
             if (!updatedRating) return next(new HttpException(404, 'Failed to update'))
 
-            return res.status(200).json(updatedRating)
+            return res.status(204).send();
         } catch (error: any) {
             return next(new HttpException(500, error.message));
         }

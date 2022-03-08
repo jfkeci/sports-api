@@ -172,11 +172,25 @@ class EnrollmentController implements Controller {
 
             const enrollment = req.body;
 
+            if (!isValidId(enrollment.userId)) return next(new HttpException(404, 'Invalid id'));
+            if (!isValidId(enrollment.classId)) return next(new HttpException(404, 'Invalid class id'));
+
+            if (await this.EnrollmentService.hasMaxUsers(enrollment.userId)) {
+                return next(
+                    new HttpException(409, 'Max number of enrollments reached for user')
+                );
+            }
+            if (await this.EnrollmentService.hasMaxEnrollments(enrollment.classId)) {
+                return next(
+                    new HttpException(409, 'Max number of enrolled users reached for class')
+                );
+            }
+
             const updatedEnrollment = await this.EnrollmentService.updateEnrollment(id, enrollment);
 
             if (!updatedEnrollment) return next(new HttpException(404, 'Failed to update'))
 
-            return res.status(200).json(updatedEnrollment)
+            return res.status(204).send();
         } catch (error: any) {
             return next(new HttpException(500, error.message))
         }

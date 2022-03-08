@@ -134,6 +134,31 @@ class SportsClassController implements Controller {
             return next(new HttpException(500, error.message));
         }
     }
+
+    public updateSportsClass = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response | void> => {
+        try {
+            const id = req.params.id;
+
+            if (!isValidId(id)) return next(new HttpException(404, 'Invalid id'));
+
+            const sportsClass = req.body;
+
+            const updatedSportsClass = await this.SportsClassService.updateSportsClass(
+                id,
+                sportsClass
+            );
+
+            if (!updatedSportsClass) return next(new HttpException(404, 'Failed to update'))
+
+            return res.status(204).send();
+        } catch (error: any) {
+            return next(new HttpException(500, error.message));
+        }
+    }
 }
 
 export default SportsClassController;

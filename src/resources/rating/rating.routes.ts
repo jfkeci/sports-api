@@ -41,7 +41,7 @@ class RatingRoutes {
         // [x] Get ratings by user - admin auth
         this.router.get(
             `${this.path}/user/:userId`,
-            authAdmin,
+            [validationMiddleware(validate), authAdmin],
             controller.ratingsByUser
         );
 

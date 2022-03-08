@@ -74,7 +74,7 @@ const SportsClassSchema = new Schema(
             required: true
         },
         weekSchedule: {
-            type: [Object],
+            type: [Date],
             required: true
         },
         classStart: {

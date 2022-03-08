@@ -10,33 +10,40 @@ class SportsClassRoutes {
 
     public init(controller: SportsClassController): Router {
 
-        // [] Create a sports class
+        // [x] Create a sports class
         this.router.post(
             `${this.path}`,
             [validationMiddleware(validate), authAdmin],
             controller.createSportsClass
         );
 
-        // [] Get all sports classes - user or admin
+        // [x] Get all sports classes - user or admin
         this.router.get(
             `${this.path}`,
             authPublic,
             controller.getSportsClasses
         );
 
-        // [] Delete a sports class - admin auth
+        // [x] Get get single sports class - user or admin
+        this.router.get(
+            `${this.path}/:id`,
+            authPublic,
+            controller.getSportsClass
+        );
+
+        // [x] Delete a sports class - admin auth
         this.router.delete(
             `${this.path}/:id`,
-            authAdmin,
+            [validationMiddleware(validate), authAdmin],
             controller.deleteSportsClass
         );
 
-        // [] Update a sports class - admin auth
-        // this.router.put(
-        //     `${this.path}/:id`,
-        //     authAdmin,
-        //     controller.updateSportsClass
-        // );
+        // [x] Update a sports class - admin auth
+        this.router.put(
+            `${this.path}/:id`,
+            [validationMiddleware(validate), authAdmin],
+            controller.updateSportsClass
+        );
 
         return this.router
     }

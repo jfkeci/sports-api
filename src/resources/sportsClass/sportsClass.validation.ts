@@ -12,7 +12,7 @@ export const validate = Joi.object({
         'Adults'
     ),
     weekSchedule: Joi.array().items(Joi.date()),
-    classStart: Joi.date().greater('now').required(),
+    classStart: Joi.date().required(),
     classDuration: Joi.number().required(),
     createdBy: Joi.string().required(),
 });
