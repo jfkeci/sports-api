@@ -7,9 +7,9 @@ import UserService from '@/resources/user/user.service';
 import { isValidId } from '@/utils/validate.utils';
 import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
 import { sendEmail } from '@/utils/mailer'
+import UserRoutes from './user.routes';
 
 class UserController implements Controller {
-    public path = '/users';
     public router = Router();
 
     private UserService = new UserService();
@@ -19,34 +19,13 @@ class UserController implements Controller {
     }
 
     private initRoutes(): void {
-        this.router.post(
-            `${this.path}/user/register`,
-            validationMiddleware(validate.register),
-            this.registerUser
-        );
-
-        this.router.post(
-            `${this.path}/admin/register`,
-            validationMiddleware(validate.register),
-            this.registerAdmin
-        );
-
-        this.router.post(
-            `${this.path}/login`,
-            validationMiddleware(validate.login),
-            this.login
-        );
-
-        this.router.get(`${this.path}/:id`, this.getUser);
-        this.router.put(`${this.path}/:id`, this.updateUser);
-        this.router.get(`${this.path}`, this.getUsers);
-        this.router.delete(`${this.path}/:id`, this.deleteUser);
+        this.router = new UserRoutes().init(this);
     }
 
     /**
      * Register user with role: 'user'
      */
-    private registerUser = async (
+    public registerUser = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -59,7 +38,9 @@ class UserController implements Controller {
 
             await sendEmail({
                 from: 'sportscomplex@info.com',
-                to: email
+                to: email,
+                subject: 'SportsComplex account verification',
+                text: `Verification code: ${email}`
             });
 
             return res.send('')
@@ -82,7 +63,7 @@ class UserController implements Controller {
     /**
      * Register user with role: 'admin'
      */
-    private registerAdmin = async (
+    public registerAdmin = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -111,7 +92,7 @@ class UserController implements Controller {
     /**
      * Login user
      */
-    private login = async (
+    public login = async (
         req: Request,
         res: Response,
         next: NextFunction,
@@ -130,7 +111,7 @@ class UserController implements Controller {
     /**
      * Get single user by id
      */
-    private getUser = async (
+    public getUser = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -152,7 +133,7 @@ class UserController implements Controller {
     /**
      * Get all users
      */
-    private getUsers = async (
+    public getUsers = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -171,7 +152,7 @@ class UserController implements Controller {
     /**
      * Delete single user by id
      */
-    private deleteUser = async (
+    public deleteUser = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -194,7 +175,7 @@ class UserController implements Controller {
     /**
      * Update single user by id
      */
-    private updateUser = async (
+    public updateUser = async (
         req: Request,
         res: Response,
         next: NextFunction

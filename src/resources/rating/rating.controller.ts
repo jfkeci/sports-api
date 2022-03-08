@@ -1,14 +1,11 @@
 import { Router, Request, Response, NextFunction, response } from 'express';
 import Controller from '@/utils/interfaces/controller.interface';
 import HttpException from '@/utils/exceptions/http.exception';
-import validationMiddleware from '@/middleware/validation.middleware';
-import { validate } from '@/resources/rating/rating.validation'
 import RatingService from '@/resources/rating/rating.service';
-import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
 import { isValidId } from '@/utils/validate.utils';
+import RatingRoutes from '@/resources/rating/rating.routes';
 
 class RatingController implements Controller {
-    public path = '/ratings';
     public router = Router();
 
     private RatingService = new RatingService();
@@ -18,50 +15,10 @@ class RatingController implements Controller {
     }
 
     private initRoutes(): void {
-        // [x] Create a new rating - user auth
-        this.router.post(
-            `${this.path}`,
-            [validationMiddleware(validate), authUser],
-            this.createRating
-        );
-
-        // [] Get all ratings, admin auth
-        this.router.get(
-            `${this.path}`,
-            authAdmin,
-            this.getRatings
-        );
-
-        // [] Get rating by id - admin auth
-        this.router.get(
-            `${this.path}/:id`,
-            authAdmin,
-            this.getRating
-        );
-
-        // [] Get ratings by class - admin auth
-        this.router.get(
-            `${this.path}/class/:classId`,
-            authAdmin,
-            this.ratingsByClass
-        );
-
-        // [] Get ratings by user - admin auth
-        this.router.get(
-            `${this.path}/user/:userId`,
-            authAdmin,
-            this.ratingsByUser
-        );
-
-
-        // [x] Delete rating - only for development
-        // this.router.delete(
-        //     `${this.path}/:id`,
-        //     this.deleteRating
-        // );
+        this.router = new RatingRoutes().init(this);
     }
 
-    private createRating = async (
+    public createRating = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -85,7 +42,7 @@ class RatingController implements Controller {
         }
     };
 
-    private getRatings = async (
+    public getRatings = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -101,7 +58,7 @@ class RatingController implements Controller {
         }
     };
 
-    private getRating = async (
+    public getRating = async (
         req: Request,
         res: Response,
         next: NextFunction,
@@ -121,7 +78,7 @@ class RatingController implements Controller {
         }
     };
 
-    private ratingsByClass = async (
+    public ratingsByClass = async (
         req: Request,
         res: Response,
         next: NextFunction,
@@ -141,7 +98,7 @@ class RatingController implements Controller {
         }
     };
 
-    private ratingsByUser = async (
+    public ratingsByUser = async (
         req: Request,
         res: Response,
         next: NextFunction,
@@ -161,7 +118,7 @@ class RatingController implements Controller {
         }
     };
 
-    private updateRating = async (
+    public updateRating = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -182,7 +139,7 @@ class RatingController implements Controller {
         }
     }
 
-    private deleteRating = async (
+    public deleteRating = async (
         req: Request,
         res: Response,
         next: NextFunction

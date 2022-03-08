@@ -1,15 +1,12 @@
 import { Router, Request, Response, NextFunction, response } from 'express';
 import Controller from '@/utils/interfaces/controller.interface';
 import HttpException from '@/utils/exceptions/http.exception';
-import validationMiddleware from '@/middleware/validation.middleware';
-import { validate } from '@/resources/sportsClass/sportsClass.validation'
 import SportsClassService from '@/resources/sportsClass/sportsClass.service';
-import { authAdmin, authPublic } from '@/middleware/authenticated.middleware';
 import { isValidId, validateDateRange, validateStartDate } from '@/utils/validate.utils';
 import SportService from '@/resources/sport/sport.service';
+import SportsClassRoutes from './sportsClass.routes';
 
 class SportsClassController implements Controller {
-    public path = '/classes';
     public router = Router();
 
     private SportsClassService = new SportsClassService();
@@ -20,36 +17,10 @@ class SportsClassController implements Controller {
     }
 
     private initRoutes(): void {
-        // [] Create a sports class
-        this.router.post(
-            `${this.path}`,
-            [validationMiddleware(validate), authAdmin],
-            this.createSportsClass
-        );
-
-        // [] Get all sports classes - user or admin
-        this.router.get(
-            `${this.path}`,
-            authPublic,
-            this.getSportsClasses
-        );
-
-        // [] Delete a sports class - admin auth
-        this.router.delete(
-            `${this.path}/:id`,
-            authAdmin,
-            this.deleteSportsClass
-        );
-
-        // [] Update a sports class - admin auth
-        // this.router.put(
-        //     `${this.path}/:id`,
-        //     authAdmin,
-        //     this.updateSportsClass
-        // );
+        this.router = new SportsClassRoutes().init(this);
     }
 
-    private createSportsClass = async (
+    public createSportsClass = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -105,7 +76,7 @@ class SportsClassController implements Controller {
         }
     };
 
-    private getSportsClasses = async (
+    public getSportsClasses = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -126,7 +97,7 @@ class SportsClassController implements Controller {
         }
     };
 
-    private getSportsClass = async (
+    public getSportsClass = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -145,7 +116,7 @@ class SportsClassController implements Controller {
         }
     }
 
-    private deleteSportsClass = async (
+    public deleteSportsClass = async (
         req: Request,
         res: Response,
         next: NextFunction

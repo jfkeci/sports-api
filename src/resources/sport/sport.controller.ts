@@ -1,15 +1,11 @@
 import { Router, Request, Response, NextFunction, response } from 'express';
 import Controller from '@/utils/interfaces/controller.interface';
 import HttpException from '@/utils/exceptions/http.exception';
-import validationMiddleware from '@/middleware/validation.middleware';
-import { validate } from '@/resources/sport/sport.validation'
 import SportService from '@/resources/sport/sport.service';
-import { authAdmin, authPublic } from '@/middleware/authenticated.middleware';
 import { isValidId } from '@/utils/validate.utils';
 import SportRoutes from '@/resources/sport/sport.routes';
 
 class SportController implements Controller {
-    public path = '/sports';
     public router = Router();
 
     private SportService = new SportService();

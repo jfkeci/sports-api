@@ -1,15 +1,11 @@
 import { Router, Request, Response, NextFunction, response } from 'express';
 import Controller from '@/utils/interfaces/controller.interface';
 import HttpException from '@/utils/exceptions/http.exception';
-import validationMiddleware from '@/middleware/validation.middleware';
-import { validate } from '@/resources/enrollment/enrollment.validation'
 import EnrollmentService from '@/resources/enrollment/enrollment.service';
-import { authAdmin, authPublic, authUser } from '@/middleware/authenticated.middleware';
 import { hasMaxEnrollments, hasMaxUsers, isValidId } from '@/utils/validate.utils';
-import { ResolvedConfigFileName } from 'typescript';
+import EnrollmentRoutes from './enrollment.routes';
 
 class EnrollmentController implements Controller {
-    public path = '/enrollments';
     public router = Router();
 
     private EnrollmentService = new EnrollmentService();
@@ -19,64 +15,10 @@ class EnrollmentController implements Controller {
     }
 
     private initRoutes(): void {
-        // [x] Create enrollment - user auth
-        this.router.post(
-            `${this.path}`,
-            [validationMiddleware(validate), authUser],
-            this.createEnrollment
-        );
-
-        // [x] Get all enrollments - admin auth
-        this.router.get(
-            `${this.path}`,
-            authAdmin,
-            this.getEnrollments
-        );
-
-        // [x] Get enrollment by id - admin auth
-        this.router.get(
-            `${this.path}/:id`,
-            authAdmin,
-            this.getEnrollment
-        );
-
-        // [x] Get enrollment by user and class pair - admin auth
-        this.router.get(
-            `${this.path}/pair/:userId/:classId`,
-            authAdmin,
-            this.enrollmentByUserClassPair
-        );
-
-        // [x] Get enrollment by user - user auth
-        this.router.get(
-            `${this.path}/user/:userId`,
-            authUser,
-            this.enrollmentsByUserId
-        );
-
-        // [x] Get enrollment by class - admin auth
-        this.router.get(
-            `${this.path}/class/:classId`,
-            authAdmin,
-            this.enrollmentsByClassId
-        );
-
-        // [x] Delete enrollment (unenroll) - admin and user
-        this.router.delete(
-            `${this.path}/:id`,
-            authPublic,
-            this.deleteEnrollment
-        );
-
-        // [] Update enrollment - user auth
-        this.router.put(
-            `${this.path}/:id`,
-            authUser,
-            this.updateEnrollment
-        );
+        this.router = new EnrollmentRoutes().init(this);
     }
 
-    private createEnrollment = async (
+    public createEnrollment = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -107,7 +49,7 @@ class EnrollmentController implements Controller {
         }
     };
 
-    private getEnrollments = async (
+    public getEnrollments = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -123,7 +65,7 @@ class EnrollmentController implements Controller {
         }
     }
 
-    private getEnrollment = async (
+    public getEnrollment = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -142,7 +84,7 @@ class EnrollmentController implements Controller {
         }
     }
 
-    private enrollmentsByUserId = async (
+    public enrollmentsByUserId = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -162,7 +104,7 @@ class EnrollmentController implements Controller {
         }
     }
 
-    private enrollmentsByClassId = async (
+    public enrollmentsByClassId = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -181,7 +123,7 @@ class EnrollmentController implements Controller {
         }
     }
 
-    private enrollmentByUserClassPair = async (
+    public enrollmentByUserClassPair = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -203,7 +145,7 @@ class EnrollmentController implements Controller {
         }
     }
 
-    private deleteEnrollment = async (
+    public deleteEnrollment = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -222,7 +164,7 @@ class EnrollmentController implements Controller {
         }
     }
 
-    private updateEnrollment = async (
+    public updateEnrollment = async (
         req: Request,
         res: Response,
         next: NextFunction
