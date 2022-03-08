@@ -1,4 +1,4 @@
-import { authAdmin, authPublic, authUser } from "@/middleware/authenticated.middleware";
+import { authAdmin } from "@/middleware/authenticated.middleware";
 import validationMiddleware from "@/middleware/validation.middleware";
 import { Router } from "express";
 import UserController from "@/resources/user/user.controller";
@@ -28,10 +28,10 @@ class UserRoutes {
             controller.login
         );
 
-        this.router.get(`${this.path}/:id`, controller.getUser);
-        this.router.put(`${this.path}/:id`, controller.updateUser);
-        this.router.get(`${this.path}`, controller.getUsers);
-        this.router.delete(`${this.path}/:id`, controller.deleteUser);
+        this.router.get(`${this.path}/:id`, authAdmin, controller.getUser);
+        this.router.put(`${this.path}/:id`, authAdmin, controller.updateUser);
+        this.router.get(`${this.path}`, authAdmin, controller.getUsers);
+        this.router.delete(`${this.path}/:id`, authAdmin, controller.deleteUser);
 
         return this.router
     }

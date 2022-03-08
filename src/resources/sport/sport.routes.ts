@@ -1,4 +1,4 @@
-import { authAdmin, authPublic, authUser } from "@/middleware/authenticated.middleware";
+import { authAdmin, authPublic } from "@/middleware/authenticated.middleware";
 import validationMiddleware from "@/middleware/validation.middleware";
 import { Router } from "express";
 import SportController from "@/resources/sport/sport.controller";
