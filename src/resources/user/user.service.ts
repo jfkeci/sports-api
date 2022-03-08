@@ -55,6 +55,12 @@ class UserService {
         return user;
     }
 
+    public async getUserByEmail(email: string): Promise<User | null> {
+        const user = await this.user.findOne({ email: email });
+
+        return user;
+    }
+
     /**
      * Get all users
      */

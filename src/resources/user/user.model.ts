@@ -1,7 +1,8 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt'
 import User from '@/resources/user/user.interface'
-
+import { string } from 'joi';
+import { nanoid } from 'nanoid';
 //user schema
 /**
  * @swagger
@@ -49,6 +50,17 @@ const UserSchema = new Schema(
         },
         password: {
             type: String,
+        },
+        verificationCode: {
+            type: String,
+            default: () => nanoid()
+        },
+        passwordResetCode: {
+            type: String,
+        },
+        verified: {
+            type: Boolean,
+            default: false
         },
         role: {
             type: String,

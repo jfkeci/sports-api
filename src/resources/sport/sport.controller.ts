@@ -6,6 +6,7 @@ import { validate } from '@/resources/sport/sport.validation'
 import SportService from '@/resources/sport/sport.service';
 import { authAdmin, authPublic } from '@/middleware/authenticated.middleware';
 import { isValidId } from '@/utils/validate.utils';
+import SportRoutes from '@/resources/sport/sport.routes';
 
 class SportController implements Controller {
     public path = '/sports';
@@ -18,36 +19,10 @@ class SportController implements Controller {
     }
 
     private initRoutes(): void {
-        // [x] Create a new sport - admin auth
-        this.router.post(
-            `${this.path}`,
-            [validationMiddleware(validate), authAdmin],
-            this.createSport
-        );
-
-        // [x] Get all sports - user or admin
-        this.router.get(
-            `${this.path}`,
-            authPublic,
-            this.getSports
-        );
-
-        // [x] Get sport by id - admin auth
-        this.router.get(
-            `${this.path}/:id`,
-            authAdmin,
-            this.getSport
-        );
-
-        // [x] Delete sport - admin auth
-        this.router.delete(
-            `${this.path}/:id`,
-            authAdmin,
-            this.deleteSport
-        );
+        this.router = new SportRoutes().init(this);
     }
 
-    private createSport = async (
+    public createSport = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -63,7 +38,7 @@ class SportController implements Controller {
         }
     };
 
-    private getSports = async (
+    public getSports = async (
         req: Request,
         res: Response,
         next: NextFunction
@@ -81,7 +56,7 @@ class SportController implements Controller {
         }
     };
 
-    private getSport = async (
+    public getSport = async (
         req: Request,
         res: Response,
         next: NextFunction,
@@ -100,7 +75,7 @@ class SportController implements Controller {
         }
     };
 
-    private deleteSport = async (
+    public deleteSport = async (
         req: Request,
         res: Response,
         next: NextFunction

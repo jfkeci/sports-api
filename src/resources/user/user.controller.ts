@@ -6,6 +6,7 @@ import validate from '@/resources/user/user.validation'
 import UserService from '@/resources/user/user.service';
 import { isValidId } from '@/utils/validate.utils';
 import { authAdmin, authUser } from '@/middleware/authenticated.middleware';
+import { sendEmail } from '@/utils/mailer'
 
 class UserController implements Controller {
     public path = '/users';
@@ -53,6 +54,16 @@ class UserController implements Controller {
         try {
             const { name, email, password } = req.body;
 
+            const user = await this.UserService.getUserByEmail(email);
+            if (user) return next(new HttpException(409, 'Account already exists'));
+
+            await sendEmail({
+                from: 'sportscomplex@info.com',
+                to: email
+            });
+
+            return res.send('')
+
             const token = await this.UserService.register(
                 name,
                 email,
@@ -78,6 +89,9 @@ class UserController implements Controller {
     ): Promise<Response | void> => {
         try {
             const { name, email, password } = req.body;
+
+            const user = await this.UserService.getUserByEmail(email);
+            if (user) return next(new HttpException(409, 'Account already exists'))
 
             const token = await this.UserService.register(
                 name,
