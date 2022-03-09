@@ -46,10 +46,6 @@ class UserController implements Controller {
 
             if (!newUser) return next(new HttpException(400, 'Something went wrong'));
 
-            const accessToken = await token.createToken(newUser);
-
-            if (!accessToken) return next(new HttpException(400, 'Something went wrong'));
-
             await sendEmail({
                 from: 'sportscomplex@info.com',
                 to: email,
@@ -62,7 +58,7 @@ class UserController implements Controller {
                 `
             });
 
-            return res.status(201).json({ accessToken });
+            return res.status(201).send('Successfully registered, confirm email');
         } catch (error: any) {
             next(new HttpException(500, error.message));
         }
@@ -92,10 +88,6 @@ class UserController implements Controller {
 
             if (!newUser) return next(new HttpException(400, 'Something went wrong'));
 
-            const accessToken = await token.createToken(newUser);
-
-            if (!accessToken) return next(new HttpException(400, 'Something went wrong'));
-
             await sendEmail({
                 from: 'sportscomplex@info.com',
                 to: email,
@@ -108,7 +100,7 @@ class UserController implements Controller {
                 `
             });
 
-            return res.status(201).json({ accessToken });
+            return res.status(201).send('Successfully registered, confirm email');
         } catch (error: any) {
             next(new HttpException(500, error.message));
         }
@@ -308,7 +300,7 @@ class UserController implements Controller {
 
             const user = await this.UserService.deleteUser(id);
 
-            if (!user) return next(new HttpException(404, 'No user found'));
+            if (!user) return next(new HttpException(404, 'Failed to delete'));
 
             return res.status(204).send();
         } catch (error: any) {

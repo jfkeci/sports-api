@@ -127,7 +127,7 @@ class SportsClassController implements Controller {
 
             const sportsClass = await this.SportsClassService.deleteSportsClass(id);
 
-            if (!sportsClass) return next(new HttpException(404, 'Invalid id'));
+            if (!sportsClass) return next(new HttpException(404, 'Failed to delete'));
 
             return res.status(204).send();
         } catch (error: any) {

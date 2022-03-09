@@ -28,6 +28,8 @@ class SportController implements Controller {
 
             const sport = await this.SportService.createSport(name);
 
+            if (!sport) return next(new HttpException(400, 'Something went wrong'));
+
             return res.status(201).json(sport);
         } catch (error: any) {
             return next(new HttpException(500, error.message));
@@ -82,7 +84,7 @@ class SportController implements Controller {
 
             const sport = this.SportService.deleteSport(id);
 
-            if (!sport) return next(new HttpException(404, 'No sport found'));
+            if (!sport) return next(new HttpException(400, 'Failed to delete'));
 
             return res.status(204).send();
         } catch (error: any) {

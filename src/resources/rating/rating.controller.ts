@@ -150,7 +150,7 @@ class RatingController implements Controller {
 
             const rating = await this.RatingService.deleteRating(id);
 
-            if (!rating) return next(new HttpException(404, 'Failed to remove'));
+            if (!rating) return next(new HttpException(404, 'Failed to delete'));
 
             return res.status(204).send();
         } catch (error: any) {

@@ -31,27 +31,6 @@ class EnrollmentRoutes {
             controller.getEnrollment
         );
 
-        // [x] Get enrollment by user and class pair - admin auth
-        this.router.get(
-            `${this.path}/pair/:userId/:classId`,
-            authAdmin,
-            controller.enrollmentByUserClassPair
-        );
-
-        // [x] Get enrollment by user - user auth
-        this.router.get(
-            `${this.path}/user/:userId`,
-            authUser,
-            controller.enrollmentsByUserId
-        );
-
-        // [x] Get enrollment by class - admin auth
-        this.router.get(
-            `${this.path}/class/:classId`,
-            authAdmin,
-            controller.enrollmentsByClassId
-        );
-
         // [x] Delete enrollment (unenroll) - admin and user
         this.router.delete(
             `${this.path}/:id`,
