@@ -36,6 +36,8 @@ class RatingController implements Controller {
                 classId
             );
 
+            if (!newRating) return next(new HttpException(400, 'Something went wrong'));
+
             return res.status(201).json(newRating);
         } catch (error: any) {
             return next(new HttpException(500, error.message));
@@ -70,7 +72,7 @@ class RatingController implements Controller {
 
             const rating = await this.RatingService.getRating(id);
 
-            if (!rating) return next(new HttpException(404, 'No rating found'));
+            if (!rating) return next(new HttpException(400, 'No rating found'));
 
             return res.status(200).json(rating)
         } catch (error: any) {

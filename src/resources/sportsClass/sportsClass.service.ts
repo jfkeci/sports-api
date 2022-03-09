@@ -78,6 +78,8 @@ class SportsClassService {
             sportsClass
         );
 
+        console.log(updatedSportsClass)
+
         return updatedSportsClass;
     }
 }

@@ -1,0 +1,3995 @@
+{
+	"info": {
+		"_postman_id": "70561566-f9a8-4cf9-94d5-5403026d5d17",
+		"name": "Sports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SportsAPI",
+			"item": [
+				{
+					"name": "Sports",
+					"item": [
+						{
+							"name": "Create sport",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Basketball\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/sports",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sports"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Basketball\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/sports",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports"
+											]
+										}
+									},
+									"code": 201,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"_id\": \"6220eb175e1f53918c6fcd53\",\n    \"name\": \"Basketball\",\n    \"createdAt\": \"2022-03-03T16:21:43.133Z\",\n    \"updatedAt\": \"2022-03-03T16:21:43.133Z\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Basketball\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/sports",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Something went wrong"
+								}
+							]
+						},
+						{
+							"name": "Get sports",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{userAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/sports",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sports"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/sports",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "[\n    {\n        \"_id\": \"6220eb175e1f53918c6fcd53\",\n        \"name\": \"Basketball\",\n        \"createdAt\": \"2022-03-03T16:21:43.133Z\",\n        \"updatedAt\": \"2022-03-03T16:21:43.133Z\",\n        \"__v\": 0\n    }\n]"
+								},
+								{
+									"name": "No sports",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/sports",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No sports found"
+								}
+							]
+						},
+						{
+							"name": "Delete sport",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sports/62220effd7f7d43f05636b28",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sports",
+										"62220effd7f7d43f05636b28"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/sports/62220effd7f7d43f05636b28",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports",
+												"62220effd7f7d43f05636b28"
+											]
+										}
+									},
+									"code": 204,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": ""
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/sports/62220effd7f7d43f05636b28",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports",
+												"62220effd7f7d43f05636b28"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/sports/62220effd7f7d43f05636b28",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports",
+												"62220effd7f7d43f05636b28"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Bad request"
+								}
+							]
+						},
+						{
+							"name": "Get sport",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/sports/6220eb175e1f53918c6fcd53",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"sports",
+										"6220eb175e1f53918c6fcd53"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/sports/6220eb175e1f53918c6fcd53",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports",
+												"6220eb175e1f53918c6fcd53"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"_id\": \"6220eb175e1f53918c6fcd53\",\n    \"name\": \"Basketball\",\n    \"createdAt\": \"2022-03-03T16:21:43.133Z\",\n    \"updatedAt\": \"2022-03-03T16:21:43.133Z\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/sports/6220eb175e1f53918c6fcd53",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports",
+												"6220eb175e1f53918c6fcd53"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "No sport",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/sports/6220eb175e1f53918c6fcd53",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"sports",
+												"6220eb175e1f53918c6fcd53"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No sport found"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Login user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"userAccessToken\", jsonData.authToken)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"jfkeci@mail.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"login"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjc4OTNjNDZjZmM1MjQ2YTc2YTU0MSIsImlhdCI6MTY0NjgyODg0NiwiZXhwIjoxNjQ2OTE1MjQ2fQ.AB3QkaVaqkxhnm42x9k54m5c--VtvcaCyVJxi0D2kGQ\"\n}"
+								},
+								{
+									"name": "Invalid credentials",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"thisUserDoesNotExist@example.com\",\n    \"password\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"login"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Invalid credentials"
+								},
+								{
+									"name": "Not verified",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"notVerified@example.com\",\n    \"password\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"login"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "User not verified"
+								}
+							]
+						},
+						{
+							"name": "Register user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"mmarkovicaa11\",\n    \"email\": \"mmarkovicaa11@mail.com\",\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/user/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"newUser\",\n    \"email\": \"newUser@example.com\",\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/user/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"user",
+												"register"
+											]
+										}
+									},
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Successfully registered, confirm email"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/user/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"user",
+												"register"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Something went wrong"
+								},
+								{
+									"name": "Account exists",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"test\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/user/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"user",
+												"register"
+											]
+										}
+									},
+									"code": 409,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Account already exists"
+								}
+							]
+						},
+						{
+							"name": "Register admin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"adminjfkeci\",\n    \"email\": \"adminjfkeci@mail.com\",\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/admin/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"admin",
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"newAdmin\",\n    \"email\": \"newAdmin@example.com\",\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/admin/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"admin",
+												"register"
+											]
+										}
+									},
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Successfully registered, confirm email"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/user/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"user",
+												"register"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								},
+								{
+									"name": "Account exists",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testAdmin\",\n    \"email\": \"testAdmin@example.com\",\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/user/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"user",
+												"register"
+											]
+										}
+									},
+									"code": 409,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Account already exists"
+								}
+							]
+						},
+						{
+							"name": "Get users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get users",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												""
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"users\": [\n        {\n            \"_id\": \"6227893c46cfc5246a76a541\",\n            \"name\": \"test\",\n            \"email\": \"test@mail.com\",\n            \"verified\": true,\n            \"role\": \"user\",\n            \"verificationCode\": \"BBlSBSOuhnBMv0hS3xwaJ\",\n            \"createdAt\": \"2022-03-08T16:50:04.305Z\",\n            \"updatedAt\": \"2022-03-08T16:50:24.202Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+								},
+								{
+									"name": "Not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												""
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "No users found"
+								}
+							]
+						},
+						{
+							"name": "Get user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/6220be19491fc321bed22fb6",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"6220be19491fc321bed22fb6"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/6227893c46cfc5246a76a541",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"6227893c46cfc5246a76a541"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": null,
+									"cookie": [],
+									"body": "{\n    \"_id\": \"6227893c46cfc5246a76a541\",\n    \"name\": \"test\",\n    \"email\": \"test@mail.com\",\n    \"verified\": true,\n    \"role\": \"user\",\n    \"verificationCode\": \"BBlSBSOuhnBMv0hS3xwaJ\",\n    \"createdAt\": \"2022-03-08T16:50:04.305Z\",\n    \"updatedAt\": \"2022-03-08T16:50:24.202Z\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/133badId331",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"133badId331"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Invalid id"
+								},
+								{
+									"name": "No user found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/6220be19491fc321bed22fb2",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"6220be19491fc321bed22fb2"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "No user found"
+								}
+							]
+						},
+						{
+							"name": "Delete user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/6221db46ef2638f698caf748",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"6221db46ef2638f698caf748"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/6221db46ef2638f698caf748",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"6221db46ef2638f698caf748"
+											]
+										}
+									},
+									"code": 204,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/6221db46ef2638f698caf748",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"6221db46ef2638f698caf748"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "No user found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/6221db46ef2638f698caf748",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"6221db46ef2638f698caf748"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No user found"
+								}
+							]
+						},
+						{
+							"name": "Update user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"updatedTest\",\n    \"email\": \"updatedTest@example.com\",\n    \"password\": \"$2b$10$UyY8kA4RWosQSQOjIFejIuTtTFj6XpuMYVkBKgObmoHy9Uflw6G4a\",\n    \"role\": \"user\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/6221ea2b8b9a07b7604ab99b",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"6221ea2b8b9a07b7604ab99b"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatedTest\",\n    \"email\": \"updatedTest@example.com\",\n    \"password\": \"$2b$10$UyY8kA4RWosQSQOjIFejIuTtTFj6XpuMYVkBKgObmoHy9Uflw6G4a\",\n    \"role\": \"user\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/6221ea2b8b9a07b7604ab99b",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"6221ea2b8b9a07b7604ab99b"
+											]
+										}
+									},
+									"code": 204,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatedTest\",\n    \"email\": \"updatedTest@example.com\",\n    \"password\": \"$2b$10$UyY8kA4RWosQSQOjIFejIuTtTFj6XpuMYVkBKgObmoHy9Uflw6G4a\",\n    \"role\": \"user\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/133badId331",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"133badId331"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "No user found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatedTest\",\n    \"email\": \"updatedTest@example.com\",\n    \"password\": \"$2b$10$UyY8kA4RWosQSQOjIFejIuTtTFj6XpuMYVkBKgObmoHy9Uflw6G4a\",\n    \"role\": \"user\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/6221ea2b8b9a07b7604ab99d",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"6221ea2b8b9a07b7604ab99d"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "No user found"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/6221ea2b8b9a07b7604ab99b",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"6221ea2b8b9a07b7604ab99b"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Failed to update"
+								}
+							]
+						},
+						{
+							"name": "Reset user password",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/password/reset/62277c2a426a7006b17c65e2/eTKQ5pRNimQOyPMLmmhKt",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"password",
+										"reset",
+										"62277c2a426a7006b17c65e2",
+										"eTKQ5pRNimQOyPMLmmhKt"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/password/reset/62277c2a426a7006b17c65e2/eTKQ5pRNimQOyPMLmmhKt",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"password",
+												"reset",
+												"62277c2a426a7006b17c65e2",
+												"eTKQ5pRNimQOyPMLmmhKt"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Successfully updated password"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/password/reset/62277c2a426a7006b17c65e2/eTKQ5pRNimQOyPMLmmhKt",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"password",
+												"reset",
+												"62277c2a426a7006b17c65e2",
+												"eTKQ5pRNimQOyPMLmmhKt"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "No user",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/password/reset/62277c2a426a7006b17c65e2/eTKQ5pRNimQOyPMLmmhKt",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"password",
+												"reset",
+												"62277c2a426a7006b17c65e2",
+												"eTKQ5pRNimQOyPMLmmhKt"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No user found"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"password\": \"password\",\n    \"confirmPassword\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/password/reset/62277c2a426a7006b17c65e2/eTKQ5pRNimQOyPMLmmhKt",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"password",
+												"reset",
+												"62277c2a426a7006b17c65e2",
+												"eTKQ5pRNimQOyPMLmmhKt"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Bad request"
+								}
+							]
+						},
+						{
+							"name": "Verify user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/verify/62278254c7e16c1efd4ea531/t3DBF4HvornZHgJJRAqoM",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"verify",
+										"62278254c7e16c1efd4ea531",
+										"t3DBF4HvornZHgJJRAqoM"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/verify/62278254c7e16c1efd4ea531/t3DBF4HvornZHgJJRAqoM",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"verify",
+												"62278254c7e16c1efd4ea531",
+												"t3DBF4HvornZHgJJRAqoM"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "User successfully verified"
+								},
+								{
+									"name": "Already verified",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/verify/62278254c7e16c1efd4ea531/t3DBF4HvornZHgJJRAqoM",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"verify",
+												"62278254c7e16c1efd4ea531",
+												"t3DBF4HvornZHgJJRAqoM"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "User already verified"
+								},
+								{
+									"name": "No user found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/verify/62278254c7e16c1efd4ea531/t3DBF4HvornZHgJJRAqoM",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"verify",
+												"62278254c7e16c1efd4ea531",
+												"t3DBF4HvornZHgJJRAqoM"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "No user with this email"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/verify/62278254c7e16c1efd4ea531/t3DBF4HvornZHgJJRAqoM",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"verify",
+												"62278254c7e16c1efd4ea531",
+												"t3DBF4HvornZHgJJRAqoM"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Invalid id"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/verify/62278254c7e16c1efd4ea531/t3DBF4HvornZHgJJRAqoM",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"verify",
+												"62278254c7e16c1efd4ea531",
+												"t3DBF4HvornZHgJJRAqoM"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Bad request"
+								}
+							]
+						},
+						{
+							"name": "Forgot password",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"jfkeci@mail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/password/forgot",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"password",
+										"forgot"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\":\"jfkeci@mail.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/password/forgot",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"password",
+												"forgot"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "If user with this email is registered, you will recieve a password reset email"
+								},
+								{
+									"name": "No user found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\":\"jfkeci@mail.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/password/forgot",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"password",
+												"forgot"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No user with this email"
+								},
+								{
+									"name": "Not verified",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\":\"jfkeci@mail.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/password/forgot",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"password",
+												"forgot"
+											]
+										}
+									},
+									"code": 409,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "User not verified"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\":\"jfkeci@mail.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/password/forgot",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"password",
+												"forgot"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Bad request"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Enrollments",
+					"item": [
+						{
+							"name": "Create enrollment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{userAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/enrollments",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"enrollments"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments"
+											]
+										}
+									},
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\",\n    \"_id\": \"6228adc8ba81596d52727722\",\n    \"createdAt\": \"2022-03-09T13:38:16.423Z\",\n    \"updatedAt\": \"2022-03-09T13:38:16.423Z\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "User max enrollments",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments"
+											]
+										}
+									},
+									"code": 409,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Max number of enrollments reached for user"
+								},
+								{
+									"name": "Class max enrollments",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments"
+											]
+										}
+									},
+									"code": 409,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Max number of enrolled users reached for class"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Something went wrong"
+								}
+							]
+						},
+						{
+							"name": "Get enrollments",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/enrollments/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"enrollments",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "No enrollments",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												""
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No enrollments found"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												""
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"enrollments\": [\n        {\n            \"_id\": \"622605413bac6f0b26f50909\",\n            \"userId\": \"62231d4682168560f3030f21\",\n            \"classId\": \"62231d4682168560f3030f24\",\n            \"createdAt\": \"2022-03-07T13:14:41.952Z\",\n            \"updatedAt\": \"2022-03-08T17:08:03.123Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Get enrollment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/enrollments/62231beb2a49bb47d8f3e149",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"enrollments",
+										"62231beb2a49bb47d8f3e149"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/622605413bac6f0b26f50909",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"622605413bac6f0b26f50909"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"_id\": \"622605413bac6f0b26f50909\",\n    \"userId\": \"62231d4682168560f3030f21\",\n    \"classId\": \"62231d4682168560f3030f24\",\n    \"createdAt\": \"2022-03-07T13:14:41.952Z\",\n    \"updatedAt\": \"2022-03-08T17:08:03.123Z\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231beb2a49bb47d8f3e149",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231beb2a49bb47d8f3e149"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "No enrollment",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231beb2a49bb47d8f3e149",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231beb2a49bb47d8f3e149"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No enrollment found"
+								}
+							]
+						},
+						{
+							"name": "Delete enrollment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{userAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/enrollments/62231fac247f9a1a038b22fa",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"enrollments",
+										"62231fac247f9a1a038b22fa"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231fac247f9a1a038b22fa",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231fac247f9a1a038b22fa"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "No enrollment",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231fac247f9a1a038b22fa",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231fac247f9a1a038b22fa"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Failed to delete"
+								},
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231fac247f9a1a038b22fa",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231fac247f9a1a038b22fa"
+											]
+										}
+									},
+									"code": 204,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Update enrollment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{userAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"da\",\n    \"classId\": \"da\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/enrollments/62231beb2a49bb47d8f3e149",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"enrollments",
+										"62231beb2a49bb47d8f3e149"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"da\",\n    \"classId\": \"da\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231beb2a49bb47d8f3e149",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231beb2a49bb47d8f3e149"
+											]
+										}
+									},
+									"code": 204,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": ""
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231beb2a49bb47d8f3e149",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231beb2a49bb47d8f3e149"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "User max enrollments",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231beb2a49bb47d8f3e149",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231beb2a49bb47d8f3e149"
+											]
+										}
+									},
+									"code": 409,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Max number of enrollments reached for user"
+								},
+								{
+									"name": "Class max enrollments",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231beb2a49bb47d8f3e149",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231beb2a49bb47d8f3e149"
+											]
+										}
+									},
+									"code": 409,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Max number of enrolled users reached for class"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"userId\": \"62278254c7e16c1efd4ea531\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/enrollments/62231beb2a49bb47d8f3e149",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"enrollments",
+												"62231beb2a49bb47d8f3e149"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Something went wrong"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Ratings",
+					"item": [
+						{
+							"name": "Create rating",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\": \"Delete\",\n    \"rating\": 5,\n    \"userId\": \"62231d4c82168560f3030f26\",\n    \"classId\": \"62231d4682168560f3030f24\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/ratings",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"ratings"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"text\": \"Had fun in this class\",\n    \"rating\": 5,\n    \"userId\": \"62231d4682168560f3030f24\",\n    \"classId\": \"62231d4c82168560f3030f26\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"_id\": \"62245c68b3665e3d622c4226\",\n    \"text\": \"Had fun in this class\",\n    \"rating\": 5,\n    \"userId\": \"62231d4682168560f3030f24\",\n    \"classId\": \"62231d4c82168560f3030f26\",\n    \"createdAt\": \"2022-03-06T07:02:00.192Z\",\n    \"updatedAt\": \"2022-03-06T07:02:00.192Z\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"text\": \"Delete\",\n    \"rating\": 5,\n    \"userId\": \"62231d4c82168560f3030f26\",\n    \"classId\": \"62231d4682168560f3030f24\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"text\": \"Delete\",\n    \"rating\": 5,\n    \"userId\": \"62231d4c82168560f3030f26\",\n    \"classId\": \"62231d4682168560f3030f24\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Something went wrong"
+								}
+							]
+						},
+						{
+							"name": "Get ratings",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/ratings",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"ratings"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "[\n    {\n        \"_id\": \"62245c68b3665e3d622c4226\",\n        \"text\": \"Had fun in this class\",\n        \"rating\": 5,\n        \"userId\": \"62231d4682168560f3030f24\",\n        \"classId\": \"62231d4c82168560f3030f26\",\n        \"createdAt\": \"2022-03-06T07:02:00.192Z\",\n        \"updatedAt\": \"2022-03-06T07:02:00.192Z\",\n        \"__v\": 0\n    }\n]"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Bad request"
+								}
+							]
+						},
+						{
+							"name": "Get rating",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/ratings",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"ratings"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"_id\": \"62245c68b3665e3d622c4226\",\n    \"text\": \"Had fun in this class\",\n    \"rating\": 5,\n    \"userId\": \"62231d4682168560f3030f24\",\n    \"classId\": \"62231d4c82168560f3030f26\",\n    \"createdAt\": \"2022-03-06T07:02:00.192Z\",\n    \"updatedAt\": \"2022-03-06T07:02:00.192Z\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Bad request"
+								},
+								{
+									"name": "Not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Not rating found"
+								}
+							]
+						},
+						{
+							"name": "Get ratings by class",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/ratings/class/62231d4c82168560f3030f26",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"ratings",
+										"class",
+										"62231d4c82168560f3030f26"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings/class/62231d4c82168560f3030f26",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings",
+												"class",
+												"62231d4c82168560f3030f26"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "[\n    {\n        \"_id\": \"62245c68b3665e3d622c4226\",\n        \"text\": \"Had fun in this class\",\n        \"rating\": 5,\n        \"userId\": \"62231d4682168560f3030f24\",\n        \"classId\": \"62231d4c82168560f3030f26\",\n        \"createdAt\": \"2022-03-06T07:02:00.192Z\",\n        \"updatedAt\": \"2022-03-06T07:02:00.192Z\",\n        \"__v\": 0\n    }\n]"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings/class/62231d4c82168560f3030f26",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings",
+												"class",
+												"62231d4c82168560f3030f26"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "No rating",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings/class/62231d4c82168560f3030f26",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings",
+												"class",
+												"62231d4c82168560f3030f26"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Not found"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings/class/62231d4c82168560f3030f26",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings",
+												"class",
+												"62231d4c82168560f3030f26"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Bad request"
+								}
+							]
+						},
+						{
+							"name": "Update rating",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/ratings",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"ratings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get rating by user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/ratings",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"ratings"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "[\n    {\n        \"_id\": \"62245c68b3665e3d622c4226\",\n        \"text\": \"Had fun in this class\",\n        \"rating\": 5,\n        \"userId\": \"62231d4682168560f3030f24\",\n        \"classId\": \"62231d4c82168560f3030f26\",\n        \"createdAt\": \"2022-03-06T07:02:00.192Z\",\n        \"updatedAt\": \"2022-03-06T07:02:00.192Z\",\n        \"__v\": 0\n    }\n]"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "No rating",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No rating found"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/ratings",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ratings"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Bad request"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Sports classes",
+					"item": [
+						{
+							"name": "Create a sports class",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-04-06T15:46:26.161Z\",\n        \"2022-05-06T15:46:26.161Z\"\n    ],\n    \"classStart\": \"03-07-2022\",\n    \"classDuration\": 70,\n    \"createdBy\": \"userId\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/classes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"classes"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-04-06T15:46:26.161Z\",\n        \"2022-05-06T15:46:26.161Z\"\n    ],\n    \"classStart\": \"03-07-2022\",\n    \"classDuration\": 70,\n    \"createdBy\": \"userId\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/classes",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes"
+											]
+										}
+									},
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "    {\n        \"_id\": \"6224e094e983ab7571e6bc30\",\n        \"title\": \"title\",\n        \"description\": \"description\",\n        \"sport\": \"Football\",\n        \"ageLevel\": \"Children\",\n        \"weekSchedule\": [\n            \"2022-03-06T15:46:26.161Z\",\n            \"2022-03-06T15:46:26.161Z\"\n        ],\n        \"classStart\": \"2022-05-02T22:00:00.000Z\",\n        \"classDuration\": \"5\",\n        \"createdBy\": \"createdBy\",\n        \"createdAt\": \"2022-03-06T16:25:56.971Z\",\n        \"updatedAt\": \"2022-03-06T16:25:56.971Z\",\n        \"__v\": 0\n    }"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-04-06T15:46:26.161Z\",\n        \"2022-05-06T15:46:26.161Z\"\n    ],\n    \"classStart\": \"03-07-2022\",\n    \"classDuration\": 70,\n    \"createdBy\": \"userId\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/classes",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Invalid id"
+								},
+								{
+									"name": "Bad class start",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-04-06T15:46:26.161Z\",\n        \"2022-05-06T15:46:26.161Z\"\n    ],\n    \"classStart\": \"03-07-2022\",\n    \"classDuration\": 70,\n    \"createdBy\": \"userId\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/classes",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes"
+											]
+										}
+									},
+									"code": 409,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "\"classStart\" cannot be greater than \"weekSchedule[0]\""
+								},
+								{
+									"name": "Bad duration",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-04-06T15:46:26.161Z\",\n        \"2022-05-06T15:46:26.161Z\"\n    ],\n    \"classStart\": \"03-07-2022\",\n    \"classDuration\": 70,\n    \"createdBy\": \"userId\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/classes",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes"
+											]
+										}
+									},
+									"code": 409,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "classDuration too short"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-04-06T15:46:26.161Z\",\n        \"2022-05-06T15:46:26.161Z\"\n    ],\n    \"classStart\": \"03-07-2022\",\n    \"classDuration\": 70,\n    \"createdBy\": \"userId\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/classes",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes"
+											]
+										}
+									},
+									"code": 400,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Bad request"
+								},
+								{
+									"name": "No sport",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-04-06T15:46:26.161Z\",\n        \"2022-05-06T15:46:26.161Z\"\n    ],\n    \"classStart\": \"03-07-2022\",\n    \"classDuration\": 70,\n    \"createdBy\": \"userId\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/classes",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No sport found"
+								}
+							]
+						},
+						{
+							"name": "Get sports classes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/classes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"classes"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/classes",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes"
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "[\n    {\n        \"_id\": \"6224e094e983ab7571e6bc30\",\n        \"title\": \"title\",\n        \"description\": \"description\",\n        \"sport\": \"Football\",\n        \"ageLevel\": \"Children\",\n        \"weekSchedule\": [\n            \"2022-03-06T15:46:26.161Z\",\n            \"2022-03-06T15:46:26.161Z\"\n        ],\n        \"classStart\": \"2022-05-02T22:00:00.000Z\",\n        \"classDuration\": \"5\",\n        \"createdBy\": \"createdBy\",\n        \"createdAt\": \"2022-03-06T16:25:56.971Z\",\n        \"updatedAt\": \"2022-03-06T16:25:56.971Z\",\n        \"__v\": 0\n    }\n]"
+								},
+								{
+									"name": "Not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/classes",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "No classes found"
+								}
+							]
+						},
+						{
+							"name": "Delete sports class",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/classes/6224d7b391562e80b1fe373b",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"classes",
+										"6224d7b391562e80b1fe373b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get sports class",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/classes/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"classes",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/classes/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes",
+												""
+											]
+										}
+									},
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"_id\": \"6224e094e983ab7571e6bc30\",\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-03-06T15:46:26.161Z\"\n    ],\n    \"classStart\": \"2022-05-02T22:00:00.000Z\",\n    \"classDuration\": \"5\",\n    \"createdBy\": \"createdBy\",\n    \"createdAt\": \"2022-03-06T16:25:56.971Z\",\n    \"updatedAt\": \"2022-03-06T16:25:56.971Z\",\n    \"__v\": 0\n}"
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "GET",
+										"header": []
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Invalid id"
+								},
+								{
+									"name": "Not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/classes/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes",
+												""
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "No class found"
+								}
+							]
+						},
+						{
+							"name": "Update sports class",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{adminAccessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-03-07T15:46:26.161Z\",\n        \"2022-03-08T15:46:26.161Z\"\n    ],\n    \"classStart\": \"2022-05-02T22:00:00.000Z\",\n    \"classDuration\": \"5\",\n    \"createdBy\": \"userId\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/classes/6224e094e983ab7571e6bc30",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"classes",
+										"6224e094e983ab7571e6bc30"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfull",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-03-07T15:46:26.161Z\",\n        \"2022-03-08T15:46:26.161Z\"\n    ],\n    \"classStart\": \"2022-05-02T22:00:00.000Z\",\n    \"classDuration\": \"5\",\n    \"createdBy\": \"userId\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/classes/6224e094e983ab7571e6bc30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes",
+												"6224e094e983ab7571e6bc30"
+											]
+										}
+									},
+									"code": 204,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": ""
+								},
+								{
+									"name": "Invalid id",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-03-07T15:46:26.161Z\",\n        \"2022-03-08T15:46:26.161Z\"\n    ],\n    \"classStart\": \"2022-05-02T22:00:00.000Z\",\n    \"classDuration\": \"5\",\n    \"createdBy\": \"userId\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/classes/6224e094e983ab7571e6bc30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes",
+												"6224e094e983ab7571e6bc30"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": "Invalid id"
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"title\",\n    \"description\": \"description\",\n    \"sport\": \"Football\",\n    \"ageLevel\": \"Children\",\n    \"weekSchedule\": [\n        \"2022-03-06T15:46:26.161Z\",\n        \"2022-03-07T15:46:26.161Z\",\n        \"2022-03-08T15:46:26.161Z\"\n    ],\n    \"classStart\": \"2022-05-02T22:00:00.000Z\",\n    \"classDuration\": \"5\",\n    \"createdBy\": \"userId\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/classes/6224e094e983ab7571e6bc30",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"classes",
+												"6224e094e983ab7571e6bc30"
+											]
+										}
+									},
+									"code": 404,
+									"_postman_previewlanguage": "",
+									"header": [
+										{}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "Bad request"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:13374",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "test@example.com",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "password",
+			"type": "string"
+		},
+		{
+			"key": "password2",
+			"value": "password123",
+			"type": "string"
+		},
+		{
+			"key": "userAccessToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjc4OTNjNDZjZmM1MjQ2YTc2YTU0MSIsImlhdCI6MTY0NjgzMjE5MiwiZXhwIjoxNjQ2OTE4NTkyfQ.S6NBuUAd4F9o5SWeS4_jOxXcnyDelZP_DHguh-1zcLk",
+			"type": "string"
+		},
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "adminAccessToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjc4ZDQwNmViZjY3MzcwNDRmMWQyOSIsImlhdCI6MTY0NjgyOTg2NCwiZXhwIjoxNjQ2OTE2MjY0fQ.jV5BoXpDXJquUrZQ1ZA6Sw3M246vcS8EAWW3n5LWKoE",
+			"type": "string"
+		},
+		{
+			"key": "adminEmail",
+			"value": "testAdmin@example.com",
+			"type": "string"
+		}
+	]
+}

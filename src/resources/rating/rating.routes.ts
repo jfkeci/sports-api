@@ -41,12 +41,12 @@ class RatingRoutes {
         // [x] Get ratings by user - admin auth
         this.router.get(
             `${this.path}/user/:userId`,
-            [validationMiddleware(validate), authAdmin],
+            authAdmin,
             controller.ratingsByUser
         );
 
 
-        // [x] Delete rating - only for development
+        // [x] Delete rating - for development
         // this.router.delete(
         //     `${this.path}/:id`,
         //     this.deleteRating

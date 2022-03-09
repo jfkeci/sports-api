@@ -153,7 +153,7 @@ class UserController implements Controller {
             if (!user) return next(new HttpException(404, 'No user found'));
 
             if (!user.passwordResetCode || user.passwordResetCode != passwordResetCode) {
-                return next(new HttpException(400, 'Couldn\'t verify user'));
+                return next(new HttpException(400, 'Bad request'));
             }
 
             user.passwordResetCode = '';
@@ -187,7 +187,7 @@ class UserController implements Controller {
 
             if (!user) return next(new HttpException(404, 'No user with this email'));
 
-            if (!user.verified) return next(new HttpException(400, 'User not verified'));
+            if (!user.verified) return next(new HttpException(409, 'User not verified'));
 
             const resetCode = nanoid();
 
@@ -232,7 +232,7 @@ class UserController implements Controller {
                 const updatedUser = await this.UserService.updateUser(id, user);
 
                 if (!updatedUser) {
-                    return next(new HttpException(500, 'Something went wrong'))
+                    return next(new HttpException(400, 'Something went wrong'))
                 }
 
                 return res.status(200).send('User successfully verified')

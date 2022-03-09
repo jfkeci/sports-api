@@ -37,6 +37,8 @@ class SportsClassController implements Controller {
                 createdBy
             } = req.body;
 
+            if (!isValidId(createdBy)) return next(new HttpException(404, 'Invalid id'));
+
             const sports = await this.SportService.getSports(String(sport))
 
             if (sports.length == 0 || !sports) return next(
@@ -45,14 +47,14 @@ class SportsClassController implements Controller {
 
             if (!validateDateRange(weekSchedule, classDuration)) {
                 return next(new HttpException(
-                    400,
+                    409,
                     '"classDuration" too short'
                 ));
             }
 
             if (!validateStartDate(classStart, weekSchedule)) {
                 return next(new HttpException(
-                    400,
+                    409,
                     '"classStart" cannot be greater than "weekSchedule[0]"'
                 ));
             }
@@ -91,7 +93,7 @@ class SportsClassController implements Controller {
 
             if (!sportsClasses) return next(new HttpException(404, 'No classes found'));
 
-            return res.status(201).json(sportsClasses);
+            return res.status(200).json(sportsClasses);
         } catch (error: any) {
             return next(new HttpException(500, error.message));
         }
@@ -147,12 +149,14 @@ class SportsClassController implements Controller {
 
             const sportsClass = req.body;
 
+            console.log(sportsClass)
+
             const updatedSportsClass = await this.SportsClassService.updateSportsClass(
                 id,
                 sportsClass
             );
 
-            if (!updatedSportsClass) return next(new HttpException(404, 'Failed to update'))
+            if (!updatedSportsClass) return next(new HttpException(400, 'Failed to update'))
 
             return res.status(204).send();
         } catch (error: any) {

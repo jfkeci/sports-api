@@ -39,7 +39,7 @@ class EnrollmentRoutes {
         );
 
         // [] Update enrollment - user auth
-        this.router.put(
+        this.router.patch(
             `${this.path}/:id`,
             [validationMiddleware(validate), authUser],
             controller.updateEnrollment

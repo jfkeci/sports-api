@@ -51,7 +51,7 @@ class UserRoutes {
         );
 
         this.router.get(`${this.path}/:id`, authAdmin, controller.getUser);
-        this.router.put(`${this.path}/:id`, authAdmin, controller.updateUser);
+        this.router.patch(`${this.path}/:id`, authAdmin, controller.updateUser);
         this.router.get(`${this.path}`, authAdmin, controller.getUsers);
         this.router.delete(`${this.path}/:id`, authAdmin, controller.deleteUser);
 

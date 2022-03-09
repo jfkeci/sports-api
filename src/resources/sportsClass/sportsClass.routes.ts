@@ -39,7 +39,7 @@ class SportsClassRoutes {
         );
 
         // [x] Update a sports class - admin auth
-        this.router.put(
+        this.router.patch(
             `${this.path}/:id`,
             [validationMiddleware(validate), authAdmin],
             controller.updateSportsClass
