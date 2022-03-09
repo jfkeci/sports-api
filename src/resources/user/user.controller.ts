@@ -166,7 +166,7 @@ class UserController implements Controller {
 
             user.passwordResetCode = '';
 
-            const hash = await bcrypt.hash(password, Number(process.env.SALT));
+            const hash = await bcrypt.hash(password, 10);
 
             user.password = hash;
 

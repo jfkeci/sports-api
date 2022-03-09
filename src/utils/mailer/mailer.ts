@@ -34,10 +34,10 @@ export async function sendEmail(payload: SendMailOptions) {
 }
 
 // {
-//   user: 'soptlggmy6i7io6b@ethereal.email',
-//   pass: 'mybtg99Nh4rS2BbdUS',
-//   smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
-//   imap: { host: 'imap.ethereal.email', port: 993, secure: true },
-//   pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },
-//   web: 'https://ethereal.email'
+// user: 'tmle5pbwgzsv7pfd@ethereal.email',
+// pass: 'EmtZgqyaS1NEs3dAyp',
+// smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
+// imap: { host: 'imap.ethereal.email', port: 993, secure: true },
+// pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },
+// web: 'https://ethereal.email'
 // }

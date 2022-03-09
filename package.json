@@ -1,5 +1,5 @@
 {
-  "name": "typescript-api",
+  "name": "sports-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,7 @@
     "test": "jest",
     "start": "node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
-    "build": "tsc",
-    "postinstall": "npm run build"
+    "build": "tsc -b"
   },
   "keywords": [],
   "author": "",
