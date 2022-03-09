@@ -26,6 +26,7 @@ class App {
         this.initSwagger();
 
         this.express.use('/api', (req, res) => { res.send('Welcome to Sports API') })
+        this.express.use('/', (req, res) => { res.send('Welcome to Sports API') })
     }
 
     private initMiddleware(): void {
