@@ -38,7 +38,7 @@ class EnrollmentRoutes {
             controller.deleteEnrollment
         );
 
-        // [] Update enrollment - user auth
+        // [x] Update enrollment - user auth
         this.router.patch(
             `${this.path}/:id`,
             [validationMiddleware(validate), authUser],

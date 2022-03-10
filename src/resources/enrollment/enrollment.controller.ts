@@ -18,6 +18,9 @@ class EnrollmentController implements Controller {
         this.router = new EnrollmentRoutes().init(this);
     }
 
+    /**
+     * Create enrollment
+     */
     public createEnrollment = async (
         req: Request,
         res: Response,
@@ -51,6 +54,9 @@ class EnrollmentController implements Controller {
         }
     };
 
+    /**
+     * Get all enrollments
+     */
     public getEnrollments = async (
         _: Request,
         res: Response,
@@ -67,6 +73,9 @@ class EnrollmentController implements Controller {
         }
     }
 
+    /**
+     * Get single enrollment by id
+     */
     public getEnrollment = async (
         req: Request,
         res: Response,
@@ -86,6 +95,9 @@ class EnrollmentController implements Controller {
         }
     }
 
+    /**
+     * Get enrollments by user
+     */
     public enrollmentsByUserId = async (
         req: Request,
         res: Response,
@@ -106,6 +118,9 @@ class EnrollmentController implements Controller {
         }
     }
 
+    /**
+     * Get enrollments by class
+     */
     public enrollmentsByClassId = async (
         req: Request,
         res: Response,
@@ -125,6 +140,9 @@ class EnrollmentController implements Controller {
         }
     }
 
+    /**
+     * Get enrollment by user class pair
+     */
     public enrollmentByUserClassPair = async (
         req: Request,
         res: Response,
@@ -147,6 +165,9 @@ class EnrollmentController implements Controller {
         }
     }
 
+    /**
+     * Delete enrollment by id
+     */
     public deleteEnrollment = async (
         req: Request,
         res: Response,
@@ -166,6 +187,10 @@ class EnrollmentController implements Controller {
         }
     }
 
+
+    /**
+     * Update single enrollment
+     */
     public updateEnrollment = async (
         req: Request,
         res: Response,

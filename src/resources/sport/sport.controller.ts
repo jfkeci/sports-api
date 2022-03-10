@@ -18,6 +18,9 @@ class SportController implements Controller {
         this.router = new SportRoutes().init(this);
     }
 
+    /**
+     * Create a new sport
+     */
     public createSport = async (
         req: Request,
         res: Response,
@@ -36,6 +39,9 @@ class SportController implements Controller {
         }
     };
 
+    /**
+     * Get all sports
+     */
     public getSports = async (
         req: Request,
         res: Response,
@@ -54,6 +60,9 @@ class SportController implements Controller {
         }
     };
 
+    /**
+     * Get single sport by id
+     */
     public getSport = async (
         req: Request,
         res: Response,
@@ -73,6 +82,9 @@ class SportController implements Controller {
         }
     };
 
+    /**
+     * Delete sport by id
+     */
     public deleteSport = async (
         req: Request,
         res: Response,

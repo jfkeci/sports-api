@@ -10,49 +10,57 @@ class UserRoutes {
 
     public init(controller: UserController): Router {
 
+        // [x] register a new user
         this.router.post(
             `${this.path}/user/register`,
             validationMiddleware(validate.register),
             controller.registerUser
         );
 
+        // [x] Register a new admin
         this.router.post(
             `${this.path}/admin/register`,
             validationMiddleware(validate.register),
             controller.registerAdmin
         );
 
+        // [x] Login any user
         this.router.post(
             `${this.path}/login`,
             validationMiddleware(validate.login),
             controller.login
         );
 
-        this.router.post(
-            `${this.path}/password/reset`,
-            validationMiddleware(validate.passwordReset),
-            controller.resetPassword
-        );
-
+        // [x] Verify user
         this.router.get(
             `${this.path}/verify/:id/:verificationCode`,
             controller.verifyUser
         );
 
+        // [x] Set passwordResetCode and send email for password reset
+        this.router.post(
+            `${this.path}/password/forgot`,
+            validationMiddleware(validate.forgotPassword),
+            controller.forgotPasswordHandler
+        );
+
+        // [x] Reset user password
         this.router.get(
             `${this.path}/password/reset/:id/:passwordResetCode`,
             validationMiddleware(validate.passwordReset),
             controller.resetPassword
         );
 
-        this.router.post(
-            `${this.path}/password/forgot`,
-            controller.forgotPasswordHandler
-        );
-
+        // [x] Get user by id
         this.router.get(`${this.path}/:id`, authAdmin, controller.getUser);
+
+        // [x] Update user
         this.router.patch(`${this.path}/:id`, authAdmin, controller.updateUser);
+
+        // [x] Get all users
         this.router.get(`${this.path}`, authAdmin, controller.getUsers);
+
+        // [x] Delete user by id
         this.router.delete(`${this.path}/:id`, authAdmin, controller.deleteUser);
 
         return this.router

@@ -6,7 +6,6 @@ class RatingService {
 
     /**
      * Create a new rating
-     * 
      */
     public async createRating(
         text: string,
@@ -26,7 +25,6 @@ class RatingService {
 
     /**
      * Get all ratings
-     * 
      */
     public async getRatings(): Promise<Array<Rating>> {
         const ratings = await this.rating.find({});
@@ -36,7 +34,6 @@ class RatingService {
 
     /**
      * Get rating by id
-     * 
      */
     public async getRating(_id: string): Promise<Rating | null> {
         const rating = await this.rating.findOne({ _id });
@@ -47,7 +44,6 @@ class RatingService {
 
     /**
      * Get rating by classId
-     * 
      */
     public async ratingsByClass(classId: string): Promise<Array<Rating> | null> {
         const ratings = await this.rating.find({ classId: classId });
@@ -56,8 +52,7 @@ class RatingService {
     }
 
     /**
-     * Get rating by classId
-     * 
+     * Get rating by userId
      */
     public async ratingsByUser(userId: string): Promise<Array<Rating> | null> {
         const ratings = await this.rating.find({ userId: userId });
@@ -67,7 +62,6 @@ class RatingService {
 
     /**
      * Delete rating by id
-     * 
      */
     public async deleteRating(_id: string): Promise<Rating | null> {
         const rating = await this.rating.findByIdAndRemove(_id);
@@ -76,8 +70,7 @@ class RatingService {
     }
 
     /**
-     * Update rating by id
-     * 
+     * Update rating
      */
     public async updateRating(
         _id: string,
@@ -88,6 +81,9 @@ class RatingService {
         return updatedRating;
     }
 
+    /**
+     * Get average rating for class
+     */
     public async getAverageRatingForClass(
         classId: string
     ): Promise<any> {

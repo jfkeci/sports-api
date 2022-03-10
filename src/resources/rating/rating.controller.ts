@@ -18,6 +18,9 @@ class RatingController implements Controller {
         this.router = new RatingRoutes().init(this);
     }
 
+    /**
+     * Create a rating
+     */
     public createRating = async (
         req: Request,
         res: Response,
@@ -44,6 +47,9 @@ class RatingController implements Controller {
         }
     };
 
+    /**
+     * Get all ratings
+     */
     public getRatings = async (
         _: Request,
         res: Response,
@@ -60,6 +66,9 @@ class RatingController implements Controller {
         }
     };
 
+    /**
+     * Get single rating by id
+     */
     public getRating = async (
         req: Request,
         res: Response,
@@ -80,6 +89,9 @@ class RatingController implements Controller {
         }
     };
 
+    /**
+     * Get all ratings by classId
+     */
     public ratingsByClass = async (
         req: Request,
         res: Response,
@@ -100,6 +112,9 @@ class RatingController implements Controller {
         }
     };
 
+    /**
+     * Get all ratings by userId
+     */
     public ratingsByUser = async (
         req: Request,
         res: Response,
@@ -120,6 +135,9 @@ class RatingController implements Controller {
         }
     };
 
+    /**
+     * Update rating
+     */
     public updateRating = async (
         req: Request,
         res: Response,
@@ -141,6 +159,9 @@ class RatingController implements Controller {
         }
     }
 
+    /**
+     * Delete rating by id
+     */
     public deleteRating = async (
         req: Request,
         res: Response,

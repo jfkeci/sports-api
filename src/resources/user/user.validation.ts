@@ -22,4 +22,4 @@ const forgotPassword = Joi.object({
     email: Joi.string().email().required(),
 });
 
-export default { register, login, passwordReset };
+export default { register, login, passwordReset, forgotPassword };

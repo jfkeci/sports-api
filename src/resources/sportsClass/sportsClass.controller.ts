@@ -20,6 +20,9 @@ class SportsClassController implements Controller {
         this.router = new SportsClassRoutes().init(this);
     }
 
+    /**
+     * Create a new sports class
+     */
     public createSportsClass = async (
         req: Request,
         res: Response,
@@ -78,6 +81,9 @@ class SportsClassController implements Controller {
         }
     };
 
+    /**
+     * Get all sports classes
+     */
     public getSportsClasses = async (
         req: Request,
         res: Response,
@@ -99,6 +105,9 @@ class SportsClassController implements Controller {
         }
     };
 
+    /**
+     * Get single sports class by id
+     */
     public getSportsClass = async (
         req: Request,
         res: Response,
@@ -118,6 +127,9 @@ class SportsClassController implements Controller {
         }
     }
 
+    /**
+     * Delete a sports class by id
+     */
     public deleteSportsClass = async (
         req: Request,
         res: Response,
@@ -137,6 +149,9 @@ class SportsClassController implements Controller {
         }
     }
 
+    /**
+     * Update a sports class
+     */
     public updateSportsClass = async (
         req: Request,
         res: Response,

@@ -136,6 +136,9 @@ class UserController implements Controller {
         }
     };
 
+    /**
+     * Reset user password
+     */
     public resetPassword = async (
         req: Request,
         res: Response,
@@ -173,7 +176,7 @@ class UserController implements Controller {
     }
 
     /**
-     * Reset user password
+     * Set passwordResetCode and send email for password reset
      */
     public forgotPasswordHandler = async (
         req: Request,
@@ -210,6 +213,9 @@ class UserController implements Controller {
         }
     }
 
+    /**
+     * Verify user
+     */
     public verifyUser = async (
         req: Request,
         res: Response,

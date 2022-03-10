@@ -6,7 +6,6 @@ class SportsClassService {
 
     /**
      * Create a new sports class
-     * 
      */
     public async createSportsClass(
         title: string,
@@ -34,7 +33,6 @@ class SportsClassService {
 
     /**
      * Get all sports classes
-     * 
      */
     public async getSportsClasses(
         name?: string,
@@ -63,12 +61,18 @@ class SportsClassService {
         return sportsClass;
     }
 
+    /**
+     * Delete sports class by id
+     */
     public async deleteSportsClass(_id: string): Promise<SportsClass | null> {
         const sportsClass = await this.sportsClass.findByIdAndRemove(_id);
 
         return sportsClass;
     }
 
+    /**
+     * Update sports class
+     */
     public async updateSportsClass(
         _id: string,
         sportsClass: object
