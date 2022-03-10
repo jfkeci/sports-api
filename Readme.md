@@ -64,13 +64,13 @@ Register user and confirm email example
  ![Create a new user in postman](/assets/create-new-user.png)
 
 #### 2. Click the email preview url in app console to open email in browser
- ![Email preview](/assets/email-verification-preview.png)
+ ![Example email - user verification](/assets/email-verification-preview.png)
 
 #### 3. Confirm email
 
 Click Confirm email button
 
- ![Example email](/assets/verify-user-example-email.png)
+ ![Email preview - user verification](/assets/verify-user-example-email.png)
 
 #### 4.
  ![User is verified](/assets/user-verified.png)
@@ -86,10 +86,10 @@ Reset user account password example
  ![Forgot password request](/assets/forgot-password-request.png)
 
  #### 2. Click the email preview url in app console to open email in browser
- ![Email preview - password reset](/assets/reset-password-example-email.png)
+ ![Example email - password reset](/assets/reset-password-example-email.png)
  
  #### 3. You can see the password reset code and user id
- ![Example email - password reset](/assets/email-password-reset-preview.png)
+ ![Email preview - password reset](/assets/email-password-reset-preview.png)
 
  #### 4. Make password reset request 
  route: /api/users/password/reset/:id/:passwordResetCode
@@ -97,4 +97,4 @@ Reset user account password example
     "password": "password1234",
     "confirmPassword": "password1234"
  }
- ![User is verified](/assets/user-verified.png)
+ ![Password reset](/assets/user-verified.png)
