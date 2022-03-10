@@ -60,6 +60,11 @@ docker run -p 13374:13374 sports-api
 
 
 
+### Don't forget to set access token env variables after logging in user and admin in postman
+ ![Create a new user in postman](/assets/postman-env.png)
+
+
+
 ## Creating a new user and email verification
 
 Register user and confirm email example

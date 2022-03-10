@@ -110,6 +110,17 @@ class EnrollmentService {
 
         return (count >= 2);
     }
+
+    public async userEnrolledInClass(
+        userId: string,
+        classId: string
+    ): Promise<boolean> {
+        const enrollment = await this.enrollment.find({ userId: userId, classId: classId });
+
+        if (!enrollment) return false;
+
+        return true;
+    }
 }
 
 export default EnrollmentService;

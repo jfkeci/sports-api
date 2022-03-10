@@ -34,7 +34,7 @@ class SportsClassRoutes {
         // [x] Delete a sports class - admin auth
         this.router.delete(
             `${this.path}/:id`,
-            [validationMiddleware(validate), authAdmin],
+            authAdmin,
             controller.deleteSportsClass
         );
 
@@ -47,7 +47,6 @@ class SportsClassRoutes {
 
         return this.router
     }
-
 }
 
 export default SportsClassRoutes;

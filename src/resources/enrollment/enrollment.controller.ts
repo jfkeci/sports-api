@@ -44,6 +44,12 @@ class EnrollmentController implements Controller {
                 );
             }
 
+            if (await this.EnrollmentService.userEnrolledInClass(userId, classId)) {
+                return next(
+                    new HttpException(409, 'User already enrolled in this class')
+                );
+            }
+
             const enrollment = await this.EnrollmentService.createEnrollment(userId, classId);
 
             if (!enrollment) return next(new HttpException(400, 'Something went wrong'));

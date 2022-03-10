@@ -60,7 +60,6 @@ class RatingRoutes {
 
         return this.router
     }
-
 }
 
 export default RatingRoutes;
