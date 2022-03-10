@@ -29,12 +29,17 @@ class EnrollmentController implements Controller {
             if (!isValidId(userId)) return next(new HttpException(404, 'Invalid user id'));
             if (!isValidId(classId)) return next(new HttpException(404, 'Invalid class id'));
 
-            if (await this.EnrollmentService.hasMaxUsers(userId)) return next(
-                new HttpException(409, 'Max number of enrollments reached for user')
-            );
-            if (await this.EnrollmentService.hasMaxEnrollments(classId)) return next(
-                new HttpException(409, 'Max number of enrolled users reached for class')
-            );
+            if (await this.EnrollmentService.hasMaxEnrollments(userId, classId)) {
+                return next(
+                    new HttpException(409, 'Max number of enrollments reached for user')
+                );
+            }
+
+            if (await this.EnrollmentService.hasMaxUsers(classId)) {
+                return next(
+                    new HttpException(409, 'Max number of enrolled users reached for class')
+                );
+            }
 
             const enrollment = await this.EnrollmentService.createEnrollment(userId, classId);
 
@@ -175,12 +180,12 @@ class EnrollmentController implements Controller {
             if (!isValidId(enrollment.userId)) return next(new HttpException(404, 'Invalid id'));
             if (!isValidId(enrollment.classId)) return next(new HttpException(404, 'Invalid class id'));
 
-            if (await this.EnrollmentService.hasMaxUsers(enrollment.userId)) {
+            if (await this.EnrollmentService.hasMaxEnrollments(enrollment.userId, enrollment.classId)) {
                 return next(
                     new HttpException(409, 'Max number of enrollments reached for user')
                 );
             }
-            if (await this.EnrollmentService.hasMaxEnrollments(enrollment.classId)) {
+            if (await this.EnrollmentService.hasMaxUsers(enrollment.classId)) {
                 return next(
                     new HttpException(409, 'Max number of enrolled users reached for class')
                 );

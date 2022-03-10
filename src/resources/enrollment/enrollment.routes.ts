@@ -45,6 +45,12 @@ class EnrollmentRoutes {
             controller.updateEnrollment
         );
 
+        // [] Test route - dev only
+        // this.router.get(
+        //     `${this.path}/test/:userId`,
+        //     controller.test
+        // );
+
         return this.router
     }
 

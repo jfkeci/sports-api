@@ -69,25 +69,20 @@ class EnrollmentService {
     }
 
     public async hasMaxUsers(
-        userId: string
+        classId: string
     ): Promise<boolean> {
-        const enrollments = await this.enrollment.find({ userId: userId });
+        const count = await this.enrollment.count({ classId: classId });
 
-        if (enrollments) {
-            if (enrollments.length >= 2) return true;
-        }
-
-        return false;
+        return (count >= 10);
     }
 
     public async hasMaxEnrollments(
+        userId: string,
         classId: string
     ): Promise<boolean> {
-        const enrollments = await this.enrollment.find({ classId: classId });
-        if (enrollments) {
-            if (enrollments.length >= 10) return true;
-        }
-        return false;
+        const count = await this.enrollment.count({ userId: userId, classId: classId });
+
+        return (count >= 2);
     }
 }
 

@@ -87,6 +87,21 @@ class RatingService {
 
         return updatedRating;
     }
+
+    public async getAverageRatingForClass(
+        classId: string
+    ): Promise<any> {
+        const average = this.rating.aggregate([
+            { $match: { classId: classId } },
+            {
+                $group: {
+                    average: { $avg: "rating" }
+                }
+            }
+        ]);
+
+        return average;
+    }
 }
 
 export default RatingService;
