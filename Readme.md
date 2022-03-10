@@ -30,17 +30,10 @@ DB_DATABASE=
 
 SECRET=
 
-SMTP_USER=
-SMTP_PASSWORD=
-SMTP_PORT=
-SMTP_HOST=
-
 #### 3. Run dev on http://localhost:13374/
 ```bash
 npm run dev
 ```
-
-
 
 
 

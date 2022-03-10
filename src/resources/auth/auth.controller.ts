@@ -120,7 +120,13 @@ class AuthController implements Controller {
                 from: 'sportscomplex@info.com',
                 to: user.email,
                 subject: "Reset your password",
-                text: `Password reset code: ${resetCode}. Id ${user._id}`,
+                html: `<html>
+                <h1>Password reset</h1>
+                <br><hr><br>
+                <h3>Password reset code: ${resetCode} </h3>
+                <br><br>
+                <h3>Id: ${user._id} </h3>
+                </html>`,
             });
 
             return res.status(200).send('If user with this email is registered, you will recieve a password reset email');

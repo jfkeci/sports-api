@@ -47,12 +47,13 @@ class UserController implements Controller {
                 from: 'sportscomplex@info.com',
                 to: email,
                 subject: 'SportsComplex account verification',
-                text: `Confirm account, 
-                Verification code: ${newUser.verificationCode}
-                <a href="http://localhost:13374/api/users/verify/${newUser._id}/${newUser.verificationCode}">
-                Confirm
-                </a>
-                `
+                html: `<html><h1>Confirm account</h1>
+                <br><hr><br>
+                <h3>Verification code: ${newUser.verificationCode}</h3>
+                <br><br>
+                <h4>Click here: <a href="http://localhost:13374/api/users/verify/${newUser._id}/${newUser.verificationCode}">
+                Confirm Email
+                </a></h4></html>`
             });
 
             return res.status(201).send('Successfully registered, confirm email');
@@ -89,12 +90,13 @@ class UserController implements Controller {
                 from: 'sportscomplex@info.com',
                 to: email,
                 subject: 'SportsComplex account verification',
-                text: `Confirm account, 
-                Verification code: ${newUser.verificationCode}
-                <a href="http://localhost:13374/api/users/verify/${newUser._id}/${newUser.verificationCode}">
-                Confirm
-                </a>
-                `
+                html: `<html><h1>Confirm account</h1>
+                <br><hr><br>
+                <h3>Verification code: ${newUser.verificationCode}</h3>
+                <br><br>
+                <h4>Click here: <a href="http://localhost:13374/api/users/verify/${newUser._id}/${newUser.verificationCode}">
+                Confirm Email
+                </a></h4></html>`
             });
 
             return res.status(201).send('Successfully registered, confirm email');

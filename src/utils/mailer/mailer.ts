@@ -7,23 +7,25 @@ import log from '@/utils/logger/logger';
 //     console.log(creds)
 // }
 
-const smtp = {
-    user: String(process.env.SMTP_USER),
-    pass: String(process.env.SMTP_PASSWORD),
-    host: String(process.env.SMTP_HOST),
-    port: Number(process.env.SMTP_PORT),
-    secure: false, // Change to true in production
-}
-
-const transporter = nodemailer.createTransport({
-    ...smtp,
-    auth: {
-        user: smtp.user,
-        pass: smtp.pass
-    }
-})
-
 export async function sendEmail(payload: SendMailOptions) {
+    const creds = await nodemailer.createTestAccount();
+
+    const smtp = {
+        user: creds.user,
+        pass: creds.pass,
+        host: creds.smtp.host,
+        port: creds.smtp.port,
+        secure: false
+    }
+
+    const transporter = nodemailer.createTransport({
+        ...smtp,
+        auth: {
+            user: smtp.user,
+            pass: smtp.pass
+        }
+    })
+
     transporter.sendMail(payload, (err, info) => {
         if (err) {
             log.error(err, "Error sending email")
