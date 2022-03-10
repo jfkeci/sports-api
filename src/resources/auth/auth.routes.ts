@@ -30,7 +30,7 @@ class AuthRoutes {
         );
 
         // [x] Reset user password
-        this.router.get(
+        this.router.post(
             `${this.path}/password/reset/:id/:passwordResetCode`,
             validationMiddleware(validate.passwordReset),
             controller.resetPassword
