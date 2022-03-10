@@ -180,6 +180,34 @@ class RatingController implements Controller {
             return next(new HttpException(500, error.message));
         }
     }
+
+    /**
+     * Get average rating for class
+     */
+    public getAverageRatingForClass = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response | void> => {
+        try {
+            const classId = req.params.classId;
+
+            if (!isValidId(classId)) return next(new HttpException(
+                404,
+                'Invalid id'
+            ))
+
+            let average = await this.RatingService.getAverageRatingForClass(
+                classId
+            );
+
+            if (!average) return next(new HttpException(400, 'Something went wrong'))
+
+            return res.status(200).json(average)
+        } catch (error: any) {
+            return next(new HttpException(500, error.message));
+        }
+    }
 }
 
 export default RatingController;

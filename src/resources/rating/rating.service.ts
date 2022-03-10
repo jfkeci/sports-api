@@ -86,17 +86,18 @@ class RatingService {
      */
     public async getAverageRatingForClass(
         classId: string
-    ): Promise<any> {
-        const average = this.rating.aggregate([
+    ): Promise<Array<object> | null> {
+        const res = this.rating.aggregate([
             { $match: { classId: classId } },
             {
                 $group: {
-                    average: { $avg: "rating" }
+                    _id: "$classId",
+                    res: { $avg: "$rating" }
                 }
             }
         ]);
-
-        return average;
+        console.log(res)
+        return res;
     }
 }
 

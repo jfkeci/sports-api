@@ -45,6 +45,12 @@ class RatingRoutes {
             controller.ratingsByUser
         );
 
+        // [x] test route - admin auth
+        this.router.get(
+            `${this.path}/average/:classId`,
+            authAdmin,
+            controller.getAverageRatingForClass
+        )
 
         // [x] Delete rating - for development
         // this.router.delete(
