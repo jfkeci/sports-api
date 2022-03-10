@@ -54,3 +54,22 @@ docker build -t sports-api .
 ```bash
 docker run -p 13374:13374 sports-api
 ```
+
+
+
+### Creating a new user and email verification
+
+#### 1. Create a new user in postman
+ ![Create a new user in postman](/assets/create-new-user.png)
+
+#### 2. Click the email preview url in app console
+ ![Email preview](/assets/email-verification-preview.png)
+
+#### 3. Confirm email
+
+Click Confirm email button
+
+ ![Example email](/assets/example-email.png)
+
+#### 4.
+ ![User is verified](/assets/user-verified.png)
