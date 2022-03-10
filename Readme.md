@@ -20,12 +20,15 @@ npm install
 #### 2. setup .env file
 
 NODE_ENV=development
+
 PORT=13374
 
 API_URL=http://localhost:13374/
 
 DB_USER=
+
 DB_PASSWORD=
+
 DB_DATABASE=
 
 SECRET=
