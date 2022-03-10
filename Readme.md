@@ -83,6 +83,7 @@ Click Confirm email button
 Reset user account password example
  #### 1. Make user verification request 
  route: /api/users/verify/:id/:confirmationCode
+
  ![Forgot password request](/assets/forgot-password-request.png)
 
  #### 2. Click the email preview url in app console to open email in browser
@@ -97,4 +98,6 @@ Reset user account password example
     "password": "password1234",
     "confirmPassword": "password1234"
  }
+
+
  ![Password reset](/assets/user-verified.png)
