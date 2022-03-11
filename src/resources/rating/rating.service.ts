@@ -96,7 +96,6 @@ class RatingService {
                 }
             }
         ]);
-        console.log(res)
         return res;
     }
 }

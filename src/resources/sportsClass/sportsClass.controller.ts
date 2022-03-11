@@ -164,8 +164,6 @@ class SportsClassController implements Controller {
 
             const sportsClass = req.body;
 
-            console.log(sportsClass)
-
             const updatedSportsClass = await this.SportsClassService.updateSportsClass(
                 id,
                 sportsClass
