@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt'
 import User from '@/resources/user/user.interface'
-import { string } from 'joi';
 import { nanoid } from 'nanoid';
 //user schema
 /**

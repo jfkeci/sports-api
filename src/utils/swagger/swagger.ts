@@ -1,4 +1,3 @@
-import { ja } from 'date-fns/locale';
 import swaggerJsDoc from 'swagger-jsdoc'
 
 export const options = {

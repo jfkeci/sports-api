@@ -1,7 +1,4 @@
-import EnrollmentService from "@/resources/enrollment/enrollment.service";
 import mongoose from "mongoose";
-
-const enrollmentService = new EnrollmentService();
 
 export const isValidId = (id: string): boolean => {
     if (!id) return false;

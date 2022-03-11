@@ -85,6 +85,18 @@ class AuthController implements Controller {
 
             if (!updatedUser) return next(new HttpException(400, 'Something went wrong'));
 
+            await sendEmail({
+                from: 'sportscomplex@info.com',
+                to: user.email,
+                subject: "Password reset confirmation",
+                html: `<html>
+                <h1>Password reset</h1>
+                <br><hr><br>
+                <h3>Your password was successfully changed</h3>
+                <br><br>
+                </html>`,
+            });
+
             return res.status(200).send("Successfully updated password");
         } catch (error: any) {
             next(new HttpException(500, error.message));
